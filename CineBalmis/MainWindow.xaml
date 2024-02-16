@@ -22,7 +22,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="assets/fondo_pantalla_cine_balmis.jpg"></ImageBrush>
+            <ImageBrush ImageSource="/fondo_pantalla_cine_balmis.jpg"></ImageBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="9*"></ColumnDefinition>

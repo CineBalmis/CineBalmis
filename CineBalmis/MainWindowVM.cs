@@ -36,11 +36,11 @@ namespace CineBalmis
         // Referencias a variables
         private string empleado;
         private Button[] botonesNavegacion;
-        private UserControl vistaSeleccionada;
+        private UserControl contenidoVista;
 
         public string Empleado { get => empleado; set => SetProperty(ref empleado, value); }
         public Button[] BotonesNavegacion { get => botonesNavegacion; set => SetProperty(ref botonesNavegacion, value); }
-        public UserControl VistaSeleccionada { get => vistaSeleccionada; set => SetProperty(ref vistaSeleccionada, value); }
+        public UserControl ContenidoVista { get => contenidoVista; set => SetProperty(ref contenidoVista, value); }
 
         public MainWindowVM()
         {
@@ -104,12 +104,13 @@ namespace CineBalmis
                     Command = NavegarAEntradasClick
                 };
                 botones.Add(b1);
+
                 Button b2 = new()
                 {
                     Content = "Ocupacion",
                     Command = NavegarAOcupacionClick
                 };
-                botones.Add(b1);
+                botones.Add(b2);
             }
             BotonesNavegacion = botones.ToArray();
         }
@@ -118,14 +119,14 @@ namespace CineBalmis
         private void TrabajadorBotones() { CargarBotones("Trabajador"); }
 
         // Implementacion metodos Navegacion
-        private void NavegarAInicio() { VistaSeleccionada = NavigationService.CargarInicioView(); }
+        private void NavegarAInicio() { ContenidoVista = NavigationService.CargarInicioView(); }
 
         // Implementacion metodos Comandos - Navegacion
-        private void NavegarAPeliculas() { }
-        private void NavegarASalas() { }
-        private void NavegarASesiones() { }
-        private void NavegarAEntradas() { }
-        private void NavegarAOcupacion() { }
+        private void NavegarAPeliculas() { ContenidoVista = NavigationService.CargarPeliculasView(); }
+        private void NavegarASalas() { ContenidoVista = NavigationService.CargarSalasView(); }
+        private void NavegarASesiones() { ContenidoVista = NavigationService.CargarSesionesView(); }
+        private void NavegarAEntradas() { ContenidoVista = NavigationService.CargarEntradasView(); }
+        private void NavegarAOcupacion() { ContenidoVista = NavigationService.CargarOcupacionView(); }
        
     }
 }
