@@ -35,7 +35,11 @@ namespace CineBalmis.data.models
             set { SetProperty(ref hora, value); }
         }
         private ObservableCollection<Ventas>? ventas;
-        public ObservableCollection<Ventas>? Ventas { get { return ventas; } set { SetProperty(ref ventas, value); } }
+        public ObservableCollection<Ventas>? Ventas 
+        { 
+            get { return ventas; } 
+            set { SetProperty(ref ventas, value); } 
+        }
         public Sesiones() { }
         public Sesiones(int idSession, int pelicula, int sala, string hora, ObservableCollection<Ventas> ventas)
         {
