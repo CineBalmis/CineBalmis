@@ -1,17 +1,21 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+﻿using CineBalmis.services;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace CineBalmis
 {
     internal class MainWindowVM : ObservableObject
     {
-        // Comandos
+        // Comandos - Click
         public RelayCommand SalirButtonClick;
         public RelayCommand GestorButtonClick;
         public RelayCommand TrabajadorButtonClick;
@@ -20,38 +24,54 @@ namespace CineBalmis
         public RelayCommand NavegarAPeliculasClick;
         public RelayCommand NavegarASesionesClick;
         public RelayCommand NavegarASalasClick;
+        public RelayCommand NavegarAEntradasClick;
+        public RelayCommand NavegarAOcupacionClick;
 
         // Servicios
+
+        // Servicios - Navegacion
+        private services.NavigationService NavigationService;
 
 
         // Referencias a variables
         private string empleado;
         private Button[] botonesNavegacion;
+        private UserControl vistaSeleccionada;
 
         public string Empleado { get => empleado; set => SetProperty(ref empleado, value); }
-        public Button[] BotonesNavegacion { get => botonesNavegacion; set=>SetProperty(ref botonesNavegacion, value); } 
+        public Button[] BotonesNavegacion { get => botonesNavegacion; set => SetProperty(ref botonesNavegacion, value); }
+        public UserControl VistaSeleccionada { get => vistaSeleccionada; set => SetProperty(ref vistaSeleccionada, value); }
 
         public MainWindowVM()
         {
+            // Inicializar Servicios
+            NavigationService = new();
+
+            // Comandos - Click
             SalirButtonClick = new(SalirSesion);
             GestorButtonClick = new(GestorBotones);
             TrabajadorButtonClick = new(TrabajadorBotones);
 
-            // Asignar metodos a los comandos de navegacion
+            // Comandos - Navegacion
             NavegarAPeliculasClick = new(NavegarAPeliculas);
             NavegarASesionesClick = new(NavegarASalas);
             NavegarASalasClick = new(NavegarASesiones);
+            NavegarAEntradasClick = new(NavegarAEntradas);
+            NavegarAOcupacionClick = new(NavegarAOcupacion);
 
-            Empleado = "Identificate";
+            // Reset del programa
+            SalirSesion();
         }
 
         private void SalirSesion()
         {
-
+            CargarBotones("Identificate");
+            NavegarAInicio();
         }
 
-        private void CargarBotones()
+        private void CargarBotones(string tipoEmpleado)
         {
+            Empleado = tipoEmpleado;
             List<Button> botones = new();
             if (empleado.Equals("Gestor"))
             {
@@ -75,41 +95,37 @@ namespace CineBalmis
                     Command = NavegarASalasClick
                 };
                 botones.Add(b2);
-
-
             }
             else if (empleado.Equals("Trabajador"))
             {
                 Button b1 = new()
                 {
-                    Content = "Salas",
-                    Command = NavegarAPeliculasClick
+                    Content = "Entradas",
+                    Command = NavegarAEntradasClick
+                };
+                botones.Add(b1);
+                Button b2 = new()
+                {
+                    Content = "Ocupacion",
+                    Command = NavegarAOcupacionClick
                 };
                 botones.Add(b1);
             }
             BotonesNavegacion = botones.ToArray();
         }
 
-        private void GestorBotones()
-        {
-            Empleado = "Gestor";
-            CargarBotones();
-        }
-        private void TrabajadorBotones()
-        {
-            Empleado = "Trabajador";
-            CargarBotones();
-        }
+        private void GestorBotones() { CargarBotones("Gestor"); }
+        private void TrabajadorBotones() { CargarBotones("Trabajador"); }
+
+        // Implementacion metodos Navegacion
+        private void NavegarAInicio() { VistaSeleccionada = NavigationService.CargarInicioView(); }
 
         // Implementacion metodos Comandos - Navegacion
-        private void NavegarAPeliculas()
-        {
-
-        }
-        private void NavegarASalas()
-        {
-
-        }
+        private void NavegarAPeliculas() { }
+        private void NavegarASalas() { }
         private void NavegarASesiones() { }
+        private void NavegarAEntradas() { }
+        private void NavegarAOcupacion() { }
+       
     }
 }
