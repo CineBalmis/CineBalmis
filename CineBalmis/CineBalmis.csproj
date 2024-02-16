@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\fondo_pantalla_cine_balmis.jpg" />
+    <None Remove="fondo_pantalla_cine_balmis.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="assets\fondo_pantalla_cine_balmis.jpg" />
+    <Resource Include="fondo_pantalla_cine_balmis.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.2" />
     <PackageReference Include="RestSharp" Version="110.2.0" />
@@ -16,8 +26,6 @@
   <ItemGroup>
     <Folder Include="data\models\" />
     <Folder Include="services\" />
-    <Folder Include="views\" />
-    <Folder Include="assets\" />
   </ItemGroup>
 
 </Project>
