@@ -13,10 +13,11 @@ namespace CineBalmis.data.database
 {
     public class DaoPeliculas
     {
+        static SqliteConnection connection = null;
         private ObservableCollection<Peliculas> obtenerPeliculas()
         {
             //Abrir la conexión
-            SqliteConnection connection = Conexion.CrearConexion();
+            connection = Conexion.crearConexion();
 
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
@@ -44,7 +45,7 @@ namespace CineBalmis.data.database
             lector.Close();
 
             //Cerrar la conexión
-            Conexion.CerrarConexion(connection);
+            Conexion.cerrarConexion(connection);
 
             return peliculas;
         }
