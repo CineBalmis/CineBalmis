@@ -34,22 +34,17 @@ namespace CineBalmis.data.models
             get { return disponible;} 
             set {  SetProperty(ref disponible, value);}
         }
-        private ObservableCollection<Sesiones>? sesiones;
-        public ObservableCollection<Sesiones>? Sesiones 
-        { 
-            get { return sesiones; } 
-            set { SetProperty(ref sesiones, value); } 
-        }
+
+       
 
         public Salas() { }
 
-        public Salas(int idSala, string numero, int capacidad, bool disponible, ObservableCollection<Sesiones>? sesiones)
+        public Salas(int idSala, string numero, int capacidad, bool disponible)
         {
             IdSala = idSala;
             Numero = numero;
             Capacidad = capacidad;
             Disponible = disponible;
-            Sesiones = sesiones;
         }
     }
 }

@@ -49,9 +49,6 @@ namespace CineBalmis.data.models
             get { return calificacion; }
             set { SetProperty(ref calificacion, value); }
         }
-
-        private ObservableCollection<Sesiones>? sesiones;
-        public ObservableCollection<Sesiones>? Sesiones { get { return sesiones; } set { SetProperty(ref sesiones, value); } }
         public enum Generos
         {
             Drama, Comedia, Acción, Trhiller, Terror,Animación
@@ -66,7 +63,7 @@ namespace CineBalmis.data.models
 
         }
 
-        public Peliculas(int idPelicula, string titulo, string cartel, int anyo, string genero, string calificacion, ObservableCollection<Sesiones> sesiones)
+        public Peliculas(int idPelicula, string titulo, string cartel, int anyo, string genero, string calificacion)
         {
             IdPelicula = idPelicula;
             Titulo = titulo;
@@ -74,7 +71,6 @@ namespace CineBalmis.data.models
             Anyo = anyo;
             Genero = genero;
             Calificacion = calificacion;
-            Sesiones = sesiones;
         }
     }
 }
