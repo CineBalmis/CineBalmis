@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="data\models\" />
-    <Folder Include="services\" />
   </ItemGroup>
 
 </Project>
