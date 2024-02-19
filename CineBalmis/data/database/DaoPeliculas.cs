@@ -11,7 +11,7 @@ using static CineBalmis.data.models.Peliculas;
 
 namespace CineBalmis.data.database
 {
-    public class DaoPeliculas
+    public class DAOPeliculas
     {
         static SqliteConnection connection = null;
         private ObservableCollection<Peliculas> obtenerPeliculas()
@@ -23,7 +23,7 @@ namespace CineBalmis.data.database
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "SELECT * FROM peliculas";
             SqliteDataReader lector = comando.ExecuteReader();
-            ObservableCollection<Peliculas> peliculas = new ObservableCollection<Peliculas>(); ;
+            ObservableCollection<Peliculas> peliculas = new ObservableCollection<Peliculas>();
             if (lector.HasRows)
             {
                 while (lector.Read())
@@ -48,6 +48,65 @@ namespace CineBalmis.data.database
             Conexion.cerrarConexion(connection);
 
             return peliculas;
+        }
+
+        private Peliculas obtenerPelicula(int idPelicula)
+        {
+            Peliculas pelicula = new Peliculas();
+            if (existePelicula(idPelicula))
+            {
+                //Abrir la conexión
+                connection = Conexion.crearConexion();
+
+                //Consulta de selección
+                SqliteCommand comando = connection.CreateCommand();
+                comando.CommandText = "SELECT * FROM peliculas where idPelicula = @idPelicula";
+                comando.Parameters.Add("@idPelicula", SqliteType.Integer);
+                comando.Parameters["@idPelicula"].Value = idPelicula;
+                SqliteDataReader lector = comando.ExecuteReader();
+                
+                if (lector.HasRows)
+                {
+                    while (lector.Read())
+                    {
+                        idPelicula = lector.GetInt32(0);
+                        String titulo = lector.GetString(1);
+                        String cartel = lector.GetString(2);
+                        int anyo = lector.GetInt32(3);
+                        String genero = lector.GetString(4);
+                        String calificacion = lector.GetString(5);
+                        pelicula = new Peliculas(idPelicula, titulo, cartel, anyo, genero, calificacion);
+                    }
+                    // Temporal
+                    MessageBox.Show(pelicula.ToString());
+                }
+
+                //Cerrar el DataReader
+                lector.Close();
+
+                //Cerrar la conexión
+                Conexion.cerrarConexion(connection);
+            }
+            return pelicula;
+        }
+
+        public bool existePelicula(int idPelicula)
+        {
+            //Abrir la conexión
+            connection = Conexion.crearConexion();
+
+            //Consulta de selección
+            SqliteCommand comando = connection.CreateCommand();
+            comando.CommandText = "SELECT * FROM salas WHERE idPelicula = @idPelicula";
+            comando.Parameters.Add("@idPelicula", SqliteType.Integer);
+            comando.Parameters["@idPelicula"].Value = idPelicula;
+            SqliteDataReader lector = comando.ExecuteReader();
+            bool existe = false;
+            if (lector.HasRows)
+                existe = true;
+            //Cerrar el DataReader
+            lector.Close();
+            return existe;
         }
     }
 }
