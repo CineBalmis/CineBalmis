@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace CineBalmis.views.salas
 {
     /// <summary>
-    /// Lógica de interacción para SalasView.xaml
+    /// Lógica de interacción para Salas.xaml
     /// </summary>
     public partial class SalasView : UserControl
     {
@@ -24,7 +24,7 @@ namespace CineBalmis.views.salas
         public SalasView()
         {
             InitializeComponent();
-            vm = new();
+            vm = new SalasVM();
             this.DataContext = vm;
         }
     }

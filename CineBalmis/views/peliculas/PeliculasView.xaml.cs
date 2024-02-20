@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace CineBalmis.views.peliculas
 {
     /// <summary>
-    /// Lógica de interacción para PeliculasView.xaml
+    /// Lógica de interacción para Peliculas.xaml
     /// </summary>
     public partial class PeliculasView : UserControl
     {
