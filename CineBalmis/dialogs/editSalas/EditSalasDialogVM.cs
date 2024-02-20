@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CineBalmis.services;
+using System.Windows;
 
 namespace CineBalmis.dialogs.editSalas
 {
@@ -31,14 +32,16 @@ namespace CineBalmis.dialogs.editSalas
             dao = new();
 
             EditSalasButtonClick = new(EditSalasButtonClicked);
-            WeakReferenceMessenger.Default.Register<>
+            WeakReferenceMessenger.Default.Register<EditSalaMessage>(this, (r,m)=> Sala = m.Value);
         }
 
         private void EditSalasButtonClicked()
         {
             if (sala != dao.obtenerSala(sala.IdSala))
             {
+                dao.editarSalas(Sala);
                 WeakReferenceMessenger.Default.Send(new EditSalaMessageSuccess(dao.editarSalas(sala)));
+                MessageBox.Show("La informacion de la sala se ha actualizado", "Informacion de la sala", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

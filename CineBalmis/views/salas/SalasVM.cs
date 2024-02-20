@@ -17,6 +17,7 @@ namespace CineBalmis.views.salas
     {
         // Servicios
         private DAOSalas dao;
+        private NavigationService navigationService;
 
         // Comandos - Click
         public RelayCommand EditSalasButtonClick { get; }
@@ -31,6 +32,7 @@ namespace CineBalmis.views.salas
         public SalasVM()
         {
             dao = new();
+            navigationService = new NavigationService();
 
             EditSalasButtonClick = new(EditSalasButtonClicked);
 
@@ -39,7 +41,7 @@ namespace CineBalmis.views.salas
         }
         private void EditSalasButtonClicked()
         {
-            
+            bool? resultado = navigationService.CargarEditSalasDialog().ShowDialog();
         }
         private void CargarSalas()
         {
