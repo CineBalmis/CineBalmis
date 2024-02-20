@@ -10,8 +10,8 @@ namespace CineBalmis.data.models
 {
     public class Peliculas : ObservableObject
     {
-        private int idPelicula;
-        public int IdPelicula
+        private int? idPelicula;
+        public int? IdPelicula
         {
             get { return idPelicula; }
             set { SetProperty(ref idPelicula, value); }
@@ -63,7 +63,7 @@ namespace CineBalmis.data.models
 
         }
 
-        public Peliculas(int idPelicula, string titulo, string cartel, int anyo, string genero, string calificacion)
+        public Peliculas(int? idPelicula, string titulo, string cartel, int anyo, string genero, string calificacion)
         {
             IdPelicula = idPelicula;
             Titulo = titulo;

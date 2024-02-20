@@ -34,8 +34,6 @@ namespace CineBalmis.data.database
                     ventas.Add(venta);
 
                 }
-                // Temporal
-                MessageBox.Show(ventas.ToString());
             }
 
             //Cerrar el DataReader
@@ -70,8 +68,6 @@ namespace CineBalmis.data.database
 
                         venta = new Ventas(idVenta, sesion, cantidad, pago);
                     }
-                    // Temporal
-                    MessageBox.Show(venta.ToString());
                 }
 
                 //Cerrar el DataReader
