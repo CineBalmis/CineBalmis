@@ -14,7 +14,7 @@ namespace CineBalmis.data.database
     public class DAOPeliculas
     {
         static SqliteConnection connection = null;
-        public ObservableCollection<Peliculas> obtenerPeliculas()
+        private ObservableCollection<Peliculas> obtenerPeliculas()
         {
             //Abrir la conexión
             connection = Conexion.crearConexion();
@@ -50,7 +50,7 @@ namespace CineBalmis.data.database
             return peliculas;
         }
 
-        public Peliculas obtenerPelicula(int idPelicula)
+        private Peliculas obtenerPelicula(int idPelicula)
         {
             Peliculas pelicula = new Peliculas();
             if (existePelicula(idPelicula))

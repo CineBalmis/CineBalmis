@@ -14,12 +14,7 @@ namespace CineBalmis.views.peliculas
     internal class PeliculasVM : ObservableObject
     {
         // Servicios
-        private DaoPeliculas dao;
-
-        // Comandos - Click
-        public RelayCommand AddPeliculaButtonClick { get; }
-        public RelayCommand EditPeliculaButtonClick { get; }
-        public RelayCommand DeletePeliculaButtonClick { get; }
+        private DAOPeliculas dao;
 
         private ObservableCollection<Peliculas> peliculas;
         private Peliculas? peliculaSeleccionada = null;
@@ -29,19 +24,6 @@ namespace CineBalmis.views.peliculas
 
         public PeliculasVM() {
             dao = new();
-        }
-
-        
-        private void AddPeliculaButtonClicked()
-        {
-
-        }
-        private void EditPeliculaButtonClicked()
-        {
-            if(peliculaSeleccionada != null)
-            {
-
-            }
         }
         
     }

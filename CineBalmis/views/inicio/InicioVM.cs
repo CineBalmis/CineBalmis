@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using CineBalmis.services;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using static CineBalmis.services.MessageService;
 
 namespace CineBalmis.views.inicio
 {
