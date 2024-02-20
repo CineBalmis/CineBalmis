@@ -22,18 +22,5 @@ namespace CineBalmis.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"MzA3OTg0N0AzMjM0MmUzMDJlMzBiRFZjNFYyS2txK3QrN2E0bnlDanRVcEhabHlSMk9oditZZHYrdm5jWG9zPQ==
-
-MzA3OTg0N0AzMjM0MmUzMDJlMzBiRFZjNFYyS2txK3QrN2E0bnlDanRVcEhabHlSMk9oditZZHYrdm5jWG9zPQ==
-
-MzA3OTg0N0AzMjM0MmUzMDJlMzBiRFZjNFYyS2txK3QrN2E0bnlDanRVcEhabHlSMk9oditZZHYrdm5jWG9zPQ==")]
-        public string claveSyncfusion {
-            get {
-                return ((string)(this["claveSyncfusion"]));
-            }
-        }
     }
 }

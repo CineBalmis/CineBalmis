@@ -12,12 +12,9 @@ namespace CineBalmis.data.database
 {
     public class DAOVentas
     {
-        static SqliteConnection? connection = null;
+        static SqliteConnection connection = Conexion.crearConexion();
         public ObservableCollection<Ventas> obtenerVentas()
         {
-            //Abrir la conexión
-            connection = Conexion.crearConexion();
-
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "SELECT * FROM ventas";
@@ -37,8 +34,6 @@ namespace CineBalmis.data.database
                     ventas.Add(venta);
 
                 }
-                // Temporal
-                MessageBox.Show(ventas.ToString());
             }
 
             //Cerrar el DataReader
@@ -55,9 +50,6 @@ namespace CineBalmis.data.database
             Ventas venta = new Ventas();
             if (existeVenta(idVenta))
             {
-                //Abrir la conexión
-                connection = Conexion.crearConexion();
-
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
                 comando.CommandText = "SELECT * FROM ventas where idVenta = @idVenta";
@@ -76,8 +68,6 @@ namespace CineBalmis.data.database
 
                         venta = new Ventas(idVenta, sesion, cantidad, pago);
                     }
-                    // Temporal
-                    MessageBox.Show(venta.ToString());
                 }
 
                 //Cerrar el DataReader
@@ -89,50 +79,38 @@ namespace CineBalmis.data.database
             return venta;
         }
 
-        public void crearVenta(int sesion, int cantidad, string pago)
+        public bool crearVenta(int sesion, int cantidad, string pago)
         {
-                //Abrir la conexión
-                connection = Conexion.crearConexion();
+            bool hecho = false;
+            SqliteCommand comando = connection.CreateCommand();
+            comando.CommandText = "INSERT INTO sesiones VALUES (null, @sesion, @cantidad, @pago)";
+            comando.Parameters.Add("@sesion", SqliteType.Integer);
+            comando.Parameters.Add("@cantidad", SqliteType.Integer);
+            comando.Parameters.Add("@pago", SqliteType.Text);
+            comando.Parameters["@sesion"].Value = sesion;
+            comando.Parameters["@cantidad"].Value = cantidad;
+            comando.Parameters["@pago"].Value = pago;
 
-                //Consulta de selección
-                SqliteCommand comando = connection.CreateCommand();
-                comando.CommandText = "INSERT INTO sesiones VALUES (null, @sesion, @cantidad, @pago)";
-                comando.Parameters.Add("@sesion", SqliteType.Integer);
-                comando.Parameters.Add("@cantidad", SqliteType.Integer);
-                comando.Parameters.Add("@pago", SqliteType.Text);
-                comando.Parameters["@sesion"].Value = sesion;
-                comando.Parameters["@cantidad"].Value = cantidad;
-                comando.Parameters["@pago"].Value = pago;
+            hecho = comando.ExecuteNonQuery() > 0;
 
-                comando.ExecuteNonQuery();
-
-                //Cerrar la conexión
-                Conexion.cerrarConexion(connection);
-            // Falta añadir respuesta si la sala no está disponible o tiene más de 3 sesiones asignadas.
+            return hecho;
         }
 
-        public void borrarVentas()
+        public bool borrarVentas()
         {
-            //Abrir la conexión
-            connection = Conexion.crearConexion();
-
-            //Consulta de selección
+            bool hecho = false;
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "DELETE FROM ventas";
 
-            comando.ExecuteNonQuery();
+            hecho = comando.ExecuteNonQuery() > 0;
 
-            //Cerrar la conexión
-            Conexion.cerrarConexion(connection);
+            return hecho;
         }
 
 
 
         public bool existeVenta(int idVenta)
         {
-            //Abrir la conexión
-            connection = Conexion.crearConexion();
-
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "SELECT * FROM ventas WHERE idVenta = @idVenta";

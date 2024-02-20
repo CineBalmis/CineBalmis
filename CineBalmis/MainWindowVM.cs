@@ -1,4 +1,5 @@
 
+using CineBalmis.data.database;
 using CineBalmis.services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -23,7 +24,7 @@ namespace CineBalmis
 
         // Servicios
         private NavigationService navegacionService;
-
+        private DAOVentas dao;
 
         // Referencias a variables
         private string? empleado = null;
@@ -36,6 +37,7 @@ namespace CineBalmis
         {
             // Inicializar Servicios
             navegacionService = new();
+            dao = new();
 
             // Comandos - Click
             SalirButtonClick = new(SalirSesion);
@@ -47,7 +49,9 @@ namespace CineBalmis
             NavegarAEntradasClick = new(NavegarAEntradas);
             NavegarAOcupacionClick = new(NavegarAOcupacion);
 
-            WeakReferenceMessenger.Default.Register<MessageService.SeleccionadoTipoTrabajadorMessage>(this, (r, m) => { CargarBotones(m.Value); });
+            WeakReferenceMessenger.Default.Register<SeleccionadoTipoTrabajadorMessage>(this, (r, m) => { CargarBotones(m.Value); });
+
+            dao.borrarVentas();
 
             // Reset del programa
             SalirSesion();

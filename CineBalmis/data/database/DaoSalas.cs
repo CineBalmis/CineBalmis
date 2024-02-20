@@ -10,14 +10,11 @@ using System.Windows;
 
 namespace CineBalmis.data.database
 {
-    public class DAOSalas
+    public class DaoSalas
     {
-        static SqliteConnection connection = null;
+        static SqliteConnection connection = Conexion.crearConexion();
         public ObservableCollection<Salas> obtenerSalas()
         {
-            //Abrir la conexión
-            connection = Conexion.crearConexion();
-
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "SELECT * FROM salas";
@@ -36,15 +33,10 @@ namespace CineBalmis.data.database
                     Salas sala = new Salas(idSala, numero, capacidad, disponible);
                     salas.Add(sala);
                 }
-                // Temporal
-                MessageBox.Show(salas.ToString());
             }
 
             //Cerrar el DataReader
             lector.Close();
-
-            //Cerrar la conexión
-            Conexion.cerrarConexion(connection);
 
             return salas;
         }
@@ -54,9 +46,6 @@ namespace CineBalmis.data.database
             Salas sala = new Salas();
             if (existeSala(idSala))
             {
-                //Abrir la conexión
-                connection = Conexion.crearConexion();
-
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
                 comando.CommandText = "SELECT * FROM salas where idSala = @idSala";
@@ -75,8 +64,6 @@ namespace CineBalmis.data.database
 
                         sala = new Salas(idSala, numero, capacidad, disponible);
                     }
-                    // Temporal
-                    MessageBox.Show(sala.ToString());
                 }
                 //Cerrar el DataReader
                 lector.Close();
@@ -86,13 +73,33 @@ namespace CineBalmis.data.database
             return sala;
         }
 
-        public void editarSalas(int idSala, String numero, int capacidad, bool disponible)
+        public int ocupacionSala(int idSala)
         {
-            if (!existeNumeroSala(numero) && existeSala(idSala))
-            {
-                //Abrir la conexión
-                connection = Conexion.crearConexion();
+            int ocupacion = 0;
 
+            SqliteCommand comando = connection.CreateCommand();
+            comando.CommandText =
+                "SELECT SUM(ventas.cantidad) AS 'ocupacion'" +
+                "FROM salas JOIN sesiones JOIN ventas " +
+                "ON salas.idSala = sesiones.sala AND sesiones.idSesion = ventas.sesion " +
+                "WHERE salas.idSala = " + idSala + " " +
+                "GROUP BY sesiones.idSesion";
+            SqliteDataReader lector = comando.ExecuteReader();
+            if (lector.HasRows)
+            {
+                while (lector.Read())
+                {
+                    ocupacion = lector.GetInt32(0);
+                }
+            }
+            return ocupacion;
+        }
+
+        public bool editarSalas(Salas sala)
+        {
+            bool hecho = false;
+            if (!existeNumeroSala(sala.Numero) && existeSala(sala.IdSala))
+            {
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
                 comando.CommandText = "UPDATE salas SET numero = @numero, capacidad = @capacidad, disponible = @disponible WHERE idSala = @idSala";
@@ -101,26 +108,21 @@ namespace CineBalmis.data.database
                 // Es Boolean, pero no hay SqliteType.Boolean, falta probarlo.
                 comando.Parameters.Add("@disponible", SqliteType.Integer);
                 comando.Parameters.Add("@idSala", SqliteType.Integer);
-                comando.Parameters["@numero"].Value = numero;
-                comando.Parameters["@capacidad"].Value = capacidad;
-                comando.Parameters["@disponible"].Value = disponible;
-                comando.Parameters["@idSala"].Value = idSala;
+                comando.Parameters["@numero"].Value = sala.Numero;
+                comando.Parameters["@capacidad"].Value = sala.Capacidad;
+                comando.Parameters["@disponible"].Value = sala.Disponible;
+                comando.Parameters["@idSala"].Value = sala.IdSala;
 
-                comando.ExecuteNonQuery();
-
-                //Cerrar la conexión
-                Conexion.cerrarConexion(connection);
+                hecho = comando.ExecuteNonQuery() > 0;
             }
-            // Falta añadir respuesta si ya existe la sala
+            return hecho;
         }
 
-        public void crearSalas(String numero, int capacidad, bool disponible)
+        public bool crearSala(string? numero, int? capacidad, int? disponible)
         {
+            bool hecho = false;
             if (!existeNumeroSala(numero))
             {
-                //Abrir la conexión
-                connection = Conexion.crearConexion();
-
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
                 comando.CommandText = "INSERT INTO salas VALUES (null, @numero, @capacidad, @disponible)";
@@ -130,22 +132,16 @@ namespace CineBalmis.data.database
                 comando.Parameters.Add("@disponible", SqliteType.Integer);
 
                 comando.Parameters["@numero"].Value = numero;
-                comando.Parameters["@capacidad"].Value = capacidad;
+                comando.Parameters["@capacidad"].Value =capacidad;
                 comando.Parameters["@disponible"].Value = disponible;
 
-                comando.ExecuteNonQuery();
-
-                //Cerrar la conexión
-                Conexion.cerrarConexion(connection);
+                hecho = comando.ExecuteNonQuery() > 0;
             }
-            // Falta añadir respuesta si ya existe la sala
+            return hecho;
         }
 
-        public bool existeSala(int idSala)
+        public bool existeSala(int? idSala)
         {
-            //Abrir la conexión
-            connection = Conexion.crearConexion();
-
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "SELECT * FROM salas WHERE idSala = @idSala";
@@ -160,11 +156,8 @@ namespace CineBalmis.data.database
             return existe;
         }
 
-        public bool existeNumeroSala(String numero)
+        public bool existeNumeroSala(string? numero)
         {
-            //Abrir la conexión
-            connection = Conexion.crearConexion();
-
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "SELECT * FROM salas WHERE numero = @numero";
@@ -179,11 +172,8 @@ namespace CineBalmis.data.database
             return existe;
         }
 
-        public bool salaDisponible(int idSala)
+        public bool salaDisponible(int? idSala)
         {
-            //Abrir la conexión
-            connection = Conexion.crearConexion();
-
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "SELECT * FROM salas WHERE idSala = @idSala AND disponible = 1";
