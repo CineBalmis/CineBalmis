@@ -1,4 +1,5 @@
-﻿using CineBalmis.views;
+﻿using CineBalmis.dialogs.addSesion;
+using CineBalmis.views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,6 @@ namespace CineBalmis.services
         public UserControl CargarSalasView() => new UserControl();
         public UserControl CargarEntradasView() => new UserControl();
         public UserControl CargarOcupacionView() => new UserControl();
+        public AddSesionDialog CargarAddSesionDialog() => new AddSesionDialog();
     }
 }

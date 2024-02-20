@@ -15,6 +15,7 @@ namespace CineBalmis.data.database
     {
         static SqliteConnection connection = Conexion.crearConexion();
         public ObservableCollection<Peliculas> obtenerPeliculas()
+
         {
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
@@ -41,7 +42,7 @@ namespace CineBalmis.data.database
             return peliculas;
         }
 
-        public Peliculas obtenerPelicula(int idPelicula)
+        private Peliculas obtenerPelicula(int idPelicula)
         {
             Peliculas pelicula = new Peliculas();
             if (existePelicula(idPelicula))
