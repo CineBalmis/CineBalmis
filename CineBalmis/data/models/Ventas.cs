@@ -10,8 +10,8 @@ namespace CineBalmis.data.models
 {
     public class Ventas : ObservableObject
     {
-        private int idVenta;
-        public int IdVenta
+        private int? idVenta;
+        public int? IdVenta
         {
             get { return idVenta; }
             set { SetProperty(ref idVenta, value); }
@@ -40,7 +40,7 @@ namespace CineBalmis.data.models
             Efectivo, Tarjeta, Bizum, Indefinido
         }
         public Ventas(){}
-        public Ventas(int idVenta, int sesion, int cantidad, string pago)
+        public Ventas(int? idVenta, int sesion, int cantidad, string pago)
         {
             IdVenta = idVenta;
             Sesion = sesion;

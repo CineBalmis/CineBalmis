@@ -16,7 +16,7 @@ namespace CineBalmis.dialogs.editSalas
     internal class EditSalasDialogVM : ObservableObject
     {
         // Servicios
-        private DAOSalas dao;
+        private DaoSalas dao;
 
         // Comandos - Click
         public RelayCommand EditSalasButtonClick { get; }

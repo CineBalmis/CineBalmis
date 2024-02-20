@@ -15,7 +15,7 @@ namespace CineBalmis.dialogs.addSalas
     internal class AddSalasDialogVM: ObservableObject
     {
         // Servicios
-        private DAOSalas dao;
+        private DaoSalas dao;
 
         // Comandos - Click
         public RelayCommand AddSalasButtonClick { get; }
@@ -26,7 +26,7 @@ namespace CineBalmis.dialogs.addSalas
 
         public AddSalasDialogVM()
         {
-            dao = new DAOSalas();
+            dao = new DaoSalas();
 
             Salas = new Salas();
 

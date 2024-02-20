@@ -25,7 +25,7 @@ namespace CineBalmis.data.database
 
                 while (lector.Read())
                 {
-                    int idSession = lector.GetInt32(0);
+                    int? idSession = lector.GetInt32(0);
                     int pelicula = lector.GetInt32(1);
                     int sala = lector.GetInt32(2);
                     String hora = lector.GetString(3);
@@ -34,8 +34,6 @@ namespace CineBalmis.data.database
                     sesiones.Add(sesion);
 
                 }
-                // Temporal
-                MessageBox.Show(sesiones.ToString());
             }
 
             //Cerrar el DataReader
@@ -47,7 +45,7 @@ namespace CineBalmis.data.database
             return sesiones;
         }
 
-        public Sesiones obtenerSesion(int idSesion)
+        public Sesiones obtenerSesion(int? idSesion)
         {
             Sesiones sesion = new Sesiones();
             if (existeSesion(idSesion)){
@@ -70,8 +68,6 @@ namespace CineBalmis.data.database
                         sesion = new Sesiones(idSesion, pelicula, sala, hora);
 
                     }
-                    // Temporal
-                    MessageBox.Show(sesion.ToString());
                 }
 
                 //Cerrar el DataReader
@@ -88,7 +84,7 @@ namespace CineBalmis.data.database
         public bool editarSesion(Sesiones sesion)
         {
             bool hecho = false;
-            DAOSalas daoSalas = new DAOSalas();
+            DaoSalas daoSalas = new DaoSalas();
             if (!daoSalas.salaDisponible(sesion.Sala) && existeSesion(sesion.IdSesion) && !salaTiene3Sesiones(sesion.Sala))
             {
                 //Consulta de selección
@@ -111,7 +107,7 @@ namespace CineBalmis.data.database
         public bool crearSesion(int pelicula, int sala, string hora)
         {
             bool hecho = false;
-            DAOSalas daoSalas = new DAOSalas();
+            DaoSalas daoSalas = new DaoSalas();
             if (!daoSalas.salaDisponible(sala) && !salaTiene3Sesiones(sala))
             {
                 //Consulta de selección
@@ -129,7 +125,7 @@ namespace CineBalmis.data.database
             return hecho;
         }
 
-        public bool borrarSesion(int idSesion)
+        public bool borrarSesion(int? idSesion)
         {
             bool hecho = false;
             if (existeSesion(idSesion))
@@ -145,7 +141,7 @@ namespace CineBalmis.data.database
             return hecho;
         }
 
-        public bool existeSesion(int idSesion)
+        public bool existeSesion(int? idSesion)
         {
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
@@ -161,7 +157,7 @@ namespace CineBalmis.data.database
             return existe;
         }
 
-        public bool salaTiene3Sesiones(int idSala)
+        public bool salaTiene3Sesiones(int? idSala)
         {
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
