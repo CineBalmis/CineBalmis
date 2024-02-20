@@ -13,13 +13,13 @@ namespace CineBalmis.views.inicio
 {
     internal class InicioVM : ObservableObject
     {
-        public RelayCommand TrabajadorButtonClickedCommand { get; private set; }
-        public RelayCommand GestorButtonClickedCommand { get; private set; }
+        public RelayCommand TrabajadorButtonClick { get; private set; }
+        public RelayCommand GestorButtonClick { get; private set; }
 
         public InicioVM()
         {
-            GestorButtonClickedCommand = new(GestorButtonClicked);
-            TrabajadorButtonClickedCommand = new(TrabajadorButtonClicked);
+            GestorButtonClick = new(GestorButtonClicked);
+            TrabajadorButtonClick = new(TrabajadorButtonClicked);
         }
 
         private void GestorButtonClicked() { EnviarMensaje("Gestor"); }
