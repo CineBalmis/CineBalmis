@@ -13,5 +13,11 @@ namespace CineBalmis
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            //Register Syncfusion license
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(CineBalmis.Properties.Settings.Default.Clave);
+        }
     }
 }
+    
