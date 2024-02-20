@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CineBalmis.data.database;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,11 @@ namespace CineBalmis.views.ocupacion
 {
     internal class OcupacionVM : ObservableObject
     {
+        // Servicios
+        private DAOSalas dao;
+
+        public OcupacionVM() {
+            dao = new();
+        }
     }
 }
