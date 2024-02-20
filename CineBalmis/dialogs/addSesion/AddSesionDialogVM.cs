@@ -42,6 +42,8 @@ namespace CineBalmis.dialogs.addSesion
             daoSalas = new();
             daoPeliculas = new();
 
+            AddSesionButtonClick = new(AddSesionButtonClicked);
+
             ListaSalas = daoSalas.obtenerSalas();
             ListaPeliculas = daoPeliculas.obtenerPeliculas();
 
