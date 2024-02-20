@@ -85,10 +85,11 @@ namespace CineBalmis.data.database
             return sesion;
         }
 
-        public void editarSesion(int idSesion, int pelicula, int sala, string hora)
+        public bool editarSesion(Sesiones sesion)
         {
+            bool hecho = false;
             DAOSalas daoSalas = new DAOSalas();
-            if (!daoSalas.salaDisponible(sala) && existeSesion(idSesion) && !salaTiene3Sesiones(sala))
+            if (!daoSalas.salaDisponible(sesion.Sala) && existeSesion(sesion.IdSesion) && !salaTiene3Sesiones(sesion.Sala))
             {
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
@@ -97,21 +98,19 @@ namespace CineBalmis.data.database
                 comando.Parameters.Add("@sala", SqliteType.Integer);
                 comando.Parameters.Add("@hora", SqliteType.Text);
                 comando.Parameters.Add("@idSesion", SqliteType.Integer);
-                comando.Parameters["@pelicula"].Value = pelicula;
-                comando.Parameters["@sala"].Value = sala;
-                comando.Parameters["@hora"].Value = hora;
-                comando.Parameters["@idSesion"].Value = idSesion;
+                comando.Parameters["@pelicula"].Value = sesion.Pelicula;
+                comando.Parameters["@sala"].Value = sesion.Sala;
+                comando.Parameters["@hora"].Value = sesion.Hora;
+                comando.Parameters["@idSesion"].Value = sesion.IdSesion;
 
-                comando.ExecuteNonQuery();
-
-                //Cerrar la conexión
-                Conexion.cerrarConexion(connection);
+                hecho = comando.ExecuteNonQuery() > 0;
             }
-            // Falta añadir respuesta si la sala no está disponible o tiene más de 3 sesiones asignadas.
+            return hecho;
         }
 
-        public void crearSesion(int pelicula, int sala, string hora)
+        public bool crearSesion(int pelicula, int sala, string hora)
         {
+            bool hecho = false;
             DAOSalas daoSalas = new DAOSalas();
             if (!daoSalas.salaDisponible(sala) && !salaTiene3Sesiones(sala))
             {
@@ -125,17 +124,15 @@ namespace CineBalmis.data.database
                 comando.Parameters["@sala"].Value = sala;
                 comando.Parameters["@hora"].Value = hora;
 
-                comando.ExecuteNonQuery();
-
-                //Cerrar la conexión
-                Conexion.cerrarConexion(connection);
+                hecho = comando.ExecuteNonQuery() > 0;
             }
-            // Falta añadir respuesta si la sala no está disponible o tiene más de 3 sesiones asignadas.
+            return hecho;
         }
 
-        public void borrarSesion(int idSesion)
+        public bool borrarSesion(int idSesion)
         {
-            if(existeSesion(idSesion))
+            bool hecho = false;
+            if (existeSesion(idSesion))
             {
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
@@ -143,12 +140,9 @@ namespace CineBalmis.data.database
                 comando.Parameters.Add("@idSesion", SqliteType.Text);
                 comando.Parameters["@idSesion"].Value = idSesion;
 
-                comando.ExecuteNonQuery();
-
-                //Cerrar la conexión
-                Conexion.cerrarConexion(connection);
-                // Falta añadir respuesta si la sala no está disponible o tiene más de 3 sesiones asignadas.
+                hecho = comando.ExecuteNonQuery() > 0;
             }
+            return hecho;
         }
 
         public bool existeSesion(int idSesion)
