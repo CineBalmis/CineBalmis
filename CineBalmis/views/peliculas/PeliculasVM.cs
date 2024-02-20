@@ -24,6 +24,8 @@ namespace CineBalmis.views.peliculas
 
         public PeliculasVM() {
             dao = new();
+
+            Peliculas = dao.obtenerPeliculas();
         }
         
     }

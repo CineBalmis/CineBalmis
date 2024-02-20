@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace CineBalmis.services
 {
@@ -19,5 +20,13 @@ namespace CineBalmis.services
     public class SeleccionadaSalaMessage: ValueChangedMessage<Salas>
     {
         public SeleccionadaSalaMessage(Salas salas) : base(salas) { }   
+    }
+    public class EditSalaMessageSuccess: ValueChangedMessage<bool>
+    {
+        public EditSalaMessageSuccess(bool edit): base(edit) { }
+    }
+    public class EditSalaMessage: ValueChangedMessage<Salas>
+    {
+        public EditSalaMessage(Salas edit) : base(edit) { }
     }
 }
