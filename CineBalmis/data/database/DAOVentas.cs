@@ -12,12 +12,9 @@ namespace CineBalmis.data.database
 {
     public class DAOVentas
     {
-        static SqliteConnection? connection = null;
+        static SqliteConnection connection = Conexion.crearConexion();
         public ObservableCollection<Ventas> obtenerVentas()
         {
-            //Abrir la conexión
-            connection = Conexion.crearConexion();
-
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "SELECT * FROM ventas";
@@ -55,9 +52,6 @@ namespace CineBalmis.data.database
             Ventas venta = new Ventas();
             if (existeVenta(idVenta))
             {
-                //Abrir la conexión
-                connection = Conexion.crearConexion();
-
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
                 comando.CommandText = "SELECT * FROM ventas where idVenta = @idVenta";
@@ -91,9 +85,6 @@ namespace CineBalmis.data.database
 
         public void crearVenta(int sesion, int cantidad, string pago)
         {
-                //Abrir la conexión
-                connection = Conexion.crearConexion();
-
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
                 comando.CommandText = "INSERT INTO sesiones VALUES (null, @sesion, @cantidad, @pago)";
@@ -113,9 +104,6 @@ namespace CineBalmis.data.database
 
         public void borrarVentas()
         {
-            //Abrir la conexión
-            connection = Conexion.crearConexion();
-
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "DELETE FROM ventas";
@@ -130,9 +118,6 @@ namespace CineBalmis.data.database
 
         public bool existeVenta(int idVenta)
         {
-            //Abrir la conexión
-            connection = Conexion.crearConexion();
-
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "SELECT * FROM ventas WHERE idVenta = @idVenta";

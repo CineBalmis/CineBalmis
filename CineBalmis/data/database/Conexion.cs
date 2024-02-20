@@ -9,7 +9,6 @@ namespace CineBalmis.data.database
         public static SqliteConnection crearConexion()
         {
             SqliteConnection connection = new SqliteConnection("Data Source=cinebalmis.db");
-
             connection.Open();
             return connection;
         }
