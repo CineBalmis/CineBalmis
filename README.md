@@ -1,0 +1,3 @@
+- Frontend : Miguel
+- Backend : Hector
+- Base de datos : Mariano

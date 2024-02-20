@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="CineBalmis.views.sesiones.Sesiones"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CineBalmis.views.sesiones"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="plantillaSesion">
+            <StackPanel>
+                <TextBlock VerticalAlignment="Bottom">
+                <Run Text="Pelicula: "></Run>
+                <Run Text="{Binding Path=Pelicula}"></Run>
+                <Run Text=" // "></Run>
+                <Run Text="Sala: "></Run>
+                <Run Text="{Binding Path=Sala}"></Run>
+                <Run Text=" // "></Run>
+                <Run Text="Hora: "></Run>
+                <Run Text="{Binding Path=Hora}"></Run>
+
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <ListBox Margin="10" ItemsSource="{Binding Path=Sesiones}" ItemTemplate="{StaticResource plantillaSesion}" SelectedItem="{Binding Path=SesionSeleccionada}">
+        </ListBox>
+    </Grid>
+</UserControl>
