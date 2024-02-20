@@ -83,35 +83,32 @@ namespace CineBalmis.data.database
             return venta;
         }
 
-        public void crearVenta(int sesion, int cantidad, string pago)
+        public bool crearVenta(int sesion, int cantidad, string pago)
         {
-                //Consulta de selección
-                SqliteCommand comando = connection.CreateCommand();
-                comando.CommandText = "INSERT INTO sesiones VALUES (null, @sesion, @cantidad, @pago)";
-                comando.Parameters.Add("@sesion", SqliteType.Integer);
-                comando.Parameters.Add("@cantidad", SqliteType.Integer);
-                comando.Parameters.Add("@pago", SqliteType.Text);
-                comando.Parameters["@sesion"].Value = sesion;
-                comando.Parameters["@cantidad"].Value = cantidad;
-                comando.Parameters["@pago"].Value = pago;
+            bool hecho = false;
+            SqliteCommand comando = connection.CreateCommand();
+            comando.CommandText = "INSERT INTO sesiones VALUES (null, @sesion, @cantidad, @pago)";
+            comando.Parameters.Add("@sesion", SqliteType.Integer);
+            comando.Parameters.Add("@cantidad", SqliteType.Integer);
+            comando.Parameters.Add("@pago", SqliteType.Text);
+            comando.Parameters["@sesion"].Value = sesion;
+            comando.Parameters["@cantidad"].Value = cantidad;
+            comando.Parameters["@pago"].Value = pago;
 
-                comando.ExecuteNonQuery();
+            hecho = comando.ExecuteNonQuery() > 0;
 
-                //Cerrar la conexión
-                Conexion.cerrarConexion(connection);
-            // Falta añadir respuesta si la sala no está disponible o tiene más de 3 sesiones asignadas.
+            return hecho;
         }
 
-        public void borrarVentas()
+        public bool borrarVentas()
         {
-            //Consulta de selección
+            bool hecho = false;
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "DELETE FROM ventas";
 
-            comando.ExecuteNonQuery();
+            hecho = comando.ExecuteNonQuery() > 0;
 
-            //Cerrar la conexión
-            Conexion.cerrarConexion(connection);
+            return hecho;
         }
 
 
