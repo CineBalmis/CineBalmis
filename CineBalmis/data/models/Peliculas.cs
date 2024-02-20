@@ -34,8 +34,8 @@ namespace CineBalmis.data.models
         {
             get { return anyo; } set { SetProperty(ref anyo, value);}
         }
-        private string genero;
-        public string Genero
+        private Generos genero;
+        public Generos Genero
         {
             get { return genero; }
             set
@@ -43,20 +43,20 @@ namespace CineBalmis.data.models
                 SetProperty(ref genero, value);
             }
         }
-        private string calificacion;
-        public string Calificacion
+        private Calificaciones calificacion;
+        public Calificaciones Calificacion
         {
             get { return calificacion; }
             set { SetProperty(ref calificacion, value); }
         }
         public enum Generos
         {
-            Drama, Comedia, Acción, Trhiller, Terror,Animación
+            Drama, Comedia, Acción, Thriller, Terror, Animación, Indefinido
         }
         public enum Calificaciones
         {
             NRM_7, NRM_12, NRM_16,
-            NRM_18 ,APTA_TP
+            NRM_18 ,APTA_TP, INDEFINIDO
         }
         public Peliculas()
         {
@@ -69,8 +69,29 @@ namespace CineBalmis.data.models
             Titulo = titulo;
             Cartel = cartel;
             Anyo = anyo;
-            Genero = genero;
-            Calificacion = calificacion;
+            Genero = parseGeneros(genero);
+            Calificacion = parseCalificaciones(calificacion);
+        }
+
+        private Generos parseGeneros(string genero)
+        {
+            Generos generoParseado;
+            if (!Enum.TryParse(genero, true, out generoParseado))
+            {
+                generoParseado = Generos.Indefinido;
+            }
+            return generoParseado;
+        }
+
+        private Calificaciones parseCalificaciones(string calificacion)
+        {
+            Calificaciones calificacionParseada;
+
+            if (!Enum.TryParse(calificacion, true, out calificacionParseada))
+            {
+                calificacionParseada = Calificaciones.INDEFINIDO;
+            }
+            return calificacionParseada;
         }
     }
 }
