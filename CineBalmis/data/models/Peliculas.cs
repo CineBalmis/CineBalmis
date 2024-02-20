@@ -51,7 +51,7 @@ namespace CineBalmis.data.models
         }
         public enum Generos
         {
-            Drama, Comedia, Acción, Trhiller, Terror, Animación, Indefinido
+            Drama, Comedia, Acción, Thriller, Terror, Animación, Indefinido
         }
         public enum Calificaciones
         {

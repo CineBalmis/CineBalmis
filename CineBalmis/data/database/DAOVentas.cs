@@ -124,7 +124,6 @@ namespace CineBalmis.data.database
 
             //Cerrar la conexión
             Conexion.cerrarConexion(connection);
-            // Falta añadir respuesta si la sala no está disponible o tiene más de 3 sesiones asignadas.
         }
 
 
