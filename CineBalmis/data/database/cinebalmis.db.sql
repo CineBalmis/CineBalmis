@@ -36,4 +36,5 @@ CREATE TABLE IF NOT EXISTS "peliculas" (
 	"calificacion"	TEXT,
 	PRIMARY KEY("idPelicula")
 );
+INSERT INTO peliculas VALUES(null, "El indomable Will Hunting", "", 1997, "Drama", "APTA_TP");
 COMMIT;

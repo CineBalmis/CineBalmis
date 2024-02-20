@@ -33,6 +33,11 @@ namespace CineBalmis.data.models
             get { return pago; }
             set { SetProperty(ref pago, value); }
         }
+
+        public enum tipoPago
+        {
+            Efectivo, Tarjeta, Bizum
+        }
         public Ventas(){}
         public Ventas(int idVenta, int sesion, int cantidad, string pago)
         {
