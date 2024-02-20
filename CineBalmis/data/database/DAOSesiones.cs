@@ -12,12 +12,9 @@ namespace CineBalmis.data.database
 {
     public class DAOSesiones
     {
-        static SqliteConnection connection = null;
+        static SqliteConnection connection = Conexion.crearConexion();
         public ObservableCollection<Sesiones> obtenerSesiones()
         {
-            //Abrir la conexión
-            connection = Conexion.crearConexion();
-
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "SELECT * FROM sesiones";
@@ -54,9 +51,6 @@ namespace CineBalmis.data.database
         {
             Sesiones sesion = new Sesiones();
             if (existeSesion(idSesion)){
-                //Abrir la conexión
-                connection = Conexion.crearConexion();
-
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
                 comando.CommandText = "SELECT * FROM sesiones where idSesion = @idSesion";
@@ -96,9 +90,6 @@ namespace CineBalmis.data.database
             DAOSalas daoSalas = new DAOSalas();
             if (!daoSalas.salaDisponible(sala) && existeSesion(idSesion) && !salaTiene3Sesiones(sala))
             {
-                //Abrir la conexión
-                connection = Conexion.crearConexion();
-
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
                 comando.CommandText = "UPDATE sesiones SET pelicula = @pelicula, sala = @sala, hora = @hora WHERE idSesion = @idSesion";
@@ -124,9 +115,6 @@ namespace CineBalmis.data.database
             DAOSalas daoSalas = new DAOSalas();
             if (!daoSalas.salaDisponible(sala) && !salaTiene3Sesiones(sala))
             {
-                //Abrir la conexión
-                connection = Conexion.crearConexion();
-
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
                 comando.CommandText = "INSERT INTO sesiones VALUES (null, @pelicula, @sala, @hora)";
@@ -149,9 +137,6 @@ namespace CineBalmis.data.database
         {
             if(existeSesion(idSesion))
             {
-                //Abrir la conexión
-                connection = Conexion.crearConexion();
-
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
                 comando.CommandText = "DELETE FROM sesion WHERE idsession = @idSesion";
@@ -168,9 +153,6 @@ namespace CineBalmis.data.database
 
         public bool existeSesion(int idSesion)
         {
-            //Abrir la conexión
-            connection = Conexion.crearConexion();
-
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "SELECT * FROM salas WHERE idSesion = @idSesion";
@@ -187,9 +169,6 @@ namespace CineBalmis.data.database
 
         public bool salaTiene3Sesiones(int idSala)
         {
-            //Abrir la conexión
-            connection = Conexion.crearConexion();
-
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "SELECT COUNT(*) FROM sesiones WHERE idSala = @idSala";
