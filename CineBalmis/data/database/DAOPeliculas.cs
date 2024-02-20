@@ -13,7 +13,9 @@ namespace CineBalmis.data.database
 {
     public class DAOPeliculas
     {
-        static SqliteConnection connection = Conexion.crearConexion();
+
+        private SqliteConnection? connection = null;
+
         public ObservableCollection<Peliculas> obtenerPeliculas()
         {
             //Consulta de selección
@@ -68,8 +70,6 @@ namespace CineBalmis.data.database
                         String calificacion = lector.GetString(5);
                         pelicula = new Peliculas(idPelicula, titulo, cartel, anyo, genero, calificacion);
                     }
-                    // Temporal
-                    MessageBox.Show(pelicula.ToString());
                 }
 
                 //Cerrar el DataReader

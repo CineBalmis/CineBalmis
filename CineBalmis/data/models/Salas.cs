@@ -10,14 +10,14 @@ namespace CineBalmis.data.models
 {
     public class Salas : ObservableObject
     {
-        private int idSala;
-        public int IdSala 
+        private int? idSala;
+        public int? IdSala 
         { 
             get { return idSala; } 
             set { SetProperty(ref idSala, value);} 
         }
-        private String numero;
-        public String Numero 
+        private string numero;
+        public string Numero 
         { 
             get { return numero; } 
             set { SetProperty(ref numero, value);} 
@@ -28,8 +28,8 @@ namespace CineBalmis.data.models
             get { return capacidad; }
             set { SetProperty(ref capacidad, value);}
         }
-        private Boolean disponible;
-        public Boolean Disponible
+        private bool disponible;
+        public bool Disponible
         {
             get { return disponible;} 
             set {  SetProperty(ref disponible, value);}
@@ -39,7 +39,7 @@ namespace CineBalmis.data.models
 
         public Salas() { }
 
-        public Salas(int idSala, string numero, int capacidad, bool disponible)
+        public Salas(int? idSala, string numero, int capacidad, bool disponible)
         {
             IdSala = idSala;
             Numero = numero;
