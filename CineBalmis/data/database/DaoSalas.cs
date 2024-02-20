@@ -120,9 +120,10 @@ namespace CineBalmis.data.database
             return hecho;
         }
 
-        public void crearSala(Salas sala)
+        public bool crearSala(string numero, int capacidad, int disponible)
         {
-            if (!existeNumeroSala(sala.Numero))
+            bool hecho = false;
+            if (!existeNumeroSala(numero))
             {
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
@@ -132,13 +133,13 @@ namespace CineBalmis.data.database
                 // Es Boolean, pero no hay SqliteType.Boolean, falta probarlo.
                 comando.Parameters.Add("@disponible", SqliteType.Integer);
 
-                comando.Parameters["@numero"].Value = sala.Numero;
-                comando.Parameters["@capacidad"].Value = sala.Capacidad;
-                comando.Parameters["@disponible"].Value = sala.Disponible;
+                comando.Parameters["@numero"].Value = numero;
+                comando.Parameters["@capacidad"].Value =capacidad;
+                comando.Parameters["@disponible"].Value = disponible;
 
-                comando.ExecuteNonQuery();
+                hecho = comando.ExecuteNonQuery() > 0;
             }
-            // Falta añadir respuesta si ya existe la sala
+            return hecho;
         }
 
         public bool existeSala(int idSala)
