@@ -75,7 +75,7 @@ namespace CineBalmis.data.database
             return sala;
         }
 
-        public static int GetOcupacionSala(int? idSala)
+        public int ocupacionSala(int idSala)
         {
             int ocupacion = 0;
 
@@ -91,7 +91,7 @@ namespace CineBalmis.data.database
             {
                 while (lector.Read())
                 {
-                    ocupacion = (int)(long)lector["ocupacion"];
+                    ocupacion = lector.GetInt32(0);
                 }
             }
             return ocupacion;
