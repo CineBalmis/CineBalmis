@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CineBalmis.data.models.Peliculas;
 
 namespace CineBalmis.data.models
 {
@@ -27,8 +28,8 @@ namespace CineBalmis.data.models
             get { return cantidad; }
             set { SetProperty(ref cantidad, value); }
         }
-        private string pago;
-        public string Pago
+        private tipoPago pago;
+        public tipoPago Pago
         {
             get { return pago; }
             set { SetProperty(ref pago, value); }
@@ -36,7 +37,7 @@ namespace CineBalmis.data.models
 
         public enum tipoPago
         {
-            Efectivo, Tarjeta, Bizum
+            Efectivo, Tarjeta, Bizum, Indefinido
         }
         public Ventas(){}
         public Ventas(int idVenta, int sesion, int cantidad, string pago)
@@ -44,7 +45,17 @@ namespace CineBalmis.data.models
             IdVenta = idVenta;
             Sesion = sesion;
             Cantidad = cantidad;
-            Pago = pago;
+            Pago = parseTipoPago(pago);
+        }
+        private tipoPago parseTipoPago(string pago)
+        {
+            tipoPago tipoPagoParseado;
+
+            if (!Enum.TryParse(pago, true, out tipoPagoParseado))
+            {
+                tipoPagoParseado = tipoPago.Indefinido;
+            }
+            return tipoPagoParseado;
         }
     }
 }
