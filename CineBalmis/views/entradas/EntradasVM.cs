@@ -34,7 +34,7 @@ namespace CineBalmis.views.Entradas
 
             AddEntradasButtonClick = new RelayCommand(AddEntradasButtonClicked);
 
-            Ventas = dao.obtenerVentas();
+            Ventas = dao.ObtenerVentas();
         }
         private void AddEntradasButtonClicked()
         {

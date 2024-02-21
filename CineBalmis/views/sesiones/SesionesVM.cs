@@ -17,19 +17,19 @@ namespace CineBalmis.views.sesiones
     internal class SesionesVM : ObservableObject
     {
         // Servicios
-        private DAOSesiones dao;
-        private NavigationService navigationService;
+        private readonly DAOSesiones dao;
+        private readonly NavigationService navigationService;
 
         // Comandos - Click
         public RelayCommand AddSesionButtonClick { get; }
         public RelayCommand EditSesionButtonClick { get; }
         public RelayCommand DeleteSesionButtonClick { get; }
 
-        private ObservableCollection<Sesiones> sesiones;
-        private Sesiones sesionSeleccionada;
+        private ObservableCollection<data.models.Sesiones>? sesiones;
+        private data.models.Sesiones? sesionSeleccionada;
 
-        public ObservableCollection<Sesiones> Sesiones { get => sesiones; set => SetProperty(ref sesiones, value); }
-        private Sesiones SesionSeleccionada { get => sesionSeleccionada; set => SetProperty(ref sesionSeleccionada, value); }
+        public ObservableCollection<data.models.Sesiones> Sesiones { get => sesiones ?? new(); set => SetProperty(ref sesiones, value); }
+        private data.models.Sesiones? SesionSeleccionada { get => sesionSeleccionada; set => SetProperty(ref sesionSeleccionada, value); }
 
         public SesionesVM()
         {
@@ -40,7 +40,7 @@ namespace CineBalmis.views.sesiones
             EditSesionButtonClick = new RelayCommand(EditSessionButtonClicked);
             DeleteSesionButtonClick = new RelayCommand(DeleteSessionButtonClicked);
 
-            WeakReferenceMessenger.Default.Register<MessageService.SeleccionadaSesionMessage>(this, (r, m) => { SesionSeleccionada = m.Value; });
+            WeakReferenceMessenger.Default.Register<SeleccionadaSesionMessage>(this, (r, m) => { SesionSeleccionada = m.Value; });
 
             Sesiones = dao.obtenerSesiones();
         }
@@ -48,7 +48,7 @@ namespace CineBalmis.views.sesiones
         private void AddSesionButtonClicked()
         {
            bool? dialogo =  navigationService.CargarAddSesionDialog().ShowDialog();
-            if (dialogo == true)
+            if (dialogo == true && SesionSeleccionada != null)
             {
                 dao.crearSesion(SesionSeleccionada.Pelicula, SesionSeleccionada.Sala, SesionSeleccionada.Hora);
             }

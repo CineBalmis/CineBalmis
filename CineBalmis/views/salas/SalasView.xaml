@@ -6,7 +6,25 @@
              xmlns:local="clr-namespace:CineBalmis.views.salas"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="plantillaSala">
+            <StackPanel>
+                <TextBlock VerticalAlignment="Bottom">
+                    <Run Text="Número: "></Run>
+                    <Run Text="{Binding Path=Numero}"></Run>
+                    <Run Text=" // "></Run>
+                    <Run Text="Capacidad: "></Run>
+                    <Run Text="{Binding Path=Capacidad}"></Run>
+                    <Run Text=" // "></Run>
+                    <Run Text="Disponible: "></Run>
+                    <Run Text="{Binding Path=Disponible}"></Run>
+
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
-            
+        <ListBox Margin="10" ItemsSource="{Binding Path=Salas}" ItemTemplate="{StaticResource plantillaSala}" SelectedItem="{Binding Path=SalaSeleccionada}">
+        </ListBox>
     </Grid>
 </UserControl>

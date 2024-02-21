@@ -13,18 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CineBalmis.views.salas
+namespace CineBalmis.views.ocupacion
 {
     /// <summary>
-    /// Lógica de interacción para Salas.xaml
+    /// Lógica de interacción para Ocupacion.xaml
     /// </summary>
-    public partial class SalasView : UserControl
+    public partial class Ocupacion : UserControl
     {
-        private SalasVM vm;
-        public SalasView()
+        private OcupacionVM vm;
+        public Ocupacion()
         {
             InitializeComponent();
-            vm = new SalasVM();
+            vm = new OcupacionVM();
             this.DataContext = vm;
         }
     }

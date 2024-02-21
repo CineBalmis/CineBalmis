@@ -14,7 +14,7 @@ namespace CineBalmis.views.ocupacion
     internal class OcupacionVM : ObservableObject
     {
         // Servicios
-        private DAOSalas dao;
+        private DaoSalas dao;
 
         // Comandos - Click
         public RelayCommand ActualizarButtonClick { get; }
@@ -32,11 +32,11 @@ namespace CineBalmis.views.ocupacion
         }
         private void ObtenerOcupacion()
         {
-            ObservableCollection<Salas> salas = dao.obtenerSalas();
+            ObservableCollection<Salas> salas = dao.ObtenerSalas();
 
             foreach (Salas s in salas)
             {
-                Ocupaciones.Add((s, dao.ocupacionSala(s.IdSala)));
+                Ocupaciones.Add((s, dao.OcupacionSala(s.IdSala)));
             }
         }
     }

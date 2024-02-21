@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CineBalmis.views.Entradas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,18 +14,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CineBalmis.views.salas
+namespace CineBalmis.views.entradas
 {
     /// <summary>
-    /// Lógica de interacción para Salas.xaml
+    /// Lógica de interacción para Entradas.xaml
     /// </summary>
-    public partial class SalasView : UserControl
+    public partial class Entradas : UserControl
     {
-        private SalasVM vm;
-        public SalasView()
+        private readonly EntradasVM vm;
+        public Entradas()
         {
             InitializeComponent();
-            vm = new SalasVM();
+            vm = new();
             this.DataContext = vm;
         }
     }

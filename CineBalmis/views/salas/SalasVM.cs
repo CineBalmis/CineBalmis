@@ -16,17 +16,17 @@ namespace CineBalmis.views.salas
     internal class SalasVM : ObservableObject
     {
         // Servicios
-        private DAOSalas dao;
+        private DaoSalas dao;
         private NavigationService navigationService;
 
         // Comandos - Click
         public RelayCommand EditSalasButtonClick { get; }
         public RelayCommand AddSalasButtonClick { get; }
 
-        private ObservableCollection<Salas> salas;
+        private ObservableCollection<data.models.Salas> salas;
         private Salas salaSeleccionada;
 
-        public ObservableCollection<Salas> Salas { get => salas; set => SetProperty(ref salas, value); }
+        public ObservableCollection<data.models.Salas> Salas { get => salas; set => SetProperty(ref salas, value); }
         public Salas SalaSeleccionada { get => salaSeleccionada; set => SetProperty(ref salaSeleccionada, value); }
 
         public SalasVM()
@@ -45,7 +45,7 @@ namespace CineBalmis.views.salas
         }
         private void CargarSalas()
         {
-            Salas = dao.obtenerSalas();
+            Salas = dao.ObtenerSalas();
         }
     }
 }

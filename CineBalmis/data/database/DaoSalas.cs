@@ -12,14 +12,15 @@ namespace CineBalmis.data.database
 {
     public class DaoSalas
     {
-        static SqliteConnection connection = Conexion.crearConexion();
-        public ObservableCollection<Salas> obtenerSalas()
+        static readonly SqliteConnection connection = Conexion.crearConexion();
+        public DaoSalas() { Conexion.cargarDatos(connection); }
+        public ObservableCollection<Salas> ObtenerSalas()
         {
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "SELECT * FROM salas";
             SqliteDataReader lector = comando.ExecuteReader();
-            ObservableCollection<Salas> salas = new ObservableCollection<Salas>();
+            ObservableCollection<Salas> salas = new();
             if (lector.HasRows)
             {
                
@@ -30,7 +31,7 @@ namespace CineBalmis.data.database
                     int capacidad = lector.GetInt32(2);
                     Boolean disponible = lector.GetBoolean(3);
 
-                    Salas sala = new Salas(idSala, numero, capacidad, disponible);
+                    Salas sala = new(idSala, numero, capacidad, disponible);
                     salas.Add(sala);
                 }
             }
@@ -41,10 +42,10 @@ namespace CineBalmis.data.database
             return salas;
         }
 
-        public Salas obtenerSala(int idSala)
+        public Salas ObtenerSala(int? idSala)
         {
-            Salas sala = new Salas();
-            if (existeSala(idSala))
+            Salas sala = new();
+            if (ExisteSala(idSala))
             {
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
@@ -73,7 +74,7 @@ namespace CineBalmis.data.database
             return sala;
         }
 
-        public int ocupacionSala(int idSala)
+        public int OcupacionSala(int? idSala)
         {
             int ocupacion = 0;
 
@@ -95,10 +96,10 @@ namespace CineBalmis.data.database
             return ocupacion;
         }
 
-        public bool editarSalas(Salas sala)
+        public bool EditarSalas(Salas sala)
         {
             bool hecho = false;
-            if (!existeNumeroSala(sala.Numero) && existeSala(sala.IdSala))
+            if (!ExisteNumeroSala(sala.Numero) && ExisteSala(sala.IdSala))
             {
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
@@ -118,10 +119,10 @@ namespace CineBalmis.data.database
             return hecho;
         }
 
-        public bool crearSala(string? numero, int? capacidad, int? disponible)
+        public bool CrearSala(string? numero, int? capacidad, int? disponible)
         {
             bool hecho = false;
-            if (!existeNumeroSala(numero))
+            if (!ExisteNumeroSala(numero))
             {
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
@@ -140,7 +141,7 @@ namespace CineBalmis.data.database
             return hecho;
         }
 
-        public bool existeSala(int? idSala)
+        public bool ExisteSala(int? idSala)
         {
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
@@ -156,7 +157,7 @@ namespace CineBalmis.data.database
             return existe;
         }
 
-        public bool existeNumeroSala(string? numero)
+        public bool ExisteNumeroSala(string? numero)
         {
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
@@ -172,7 +173,7 @@ namespace CineBalmis.data.database
             return existe;
         }
 
-        public bool salaDisponible(int? idSala)
+        public bool SalaDisponible(int? idSala)
         {
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
