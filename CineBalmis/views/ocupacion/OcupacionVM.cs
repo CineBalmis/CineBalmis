@@ -14,7 +14,7 @@ namespace CineBalmis.views.ocupacion
     internal class OcupacionVM : ObservableObject
     {
         // Servicios
-        private DAOSalas dao;
+        private DaoSalas dao;
 
         // Comandos - Click
         public RelayCommand ActualizarButtonClick { get; }

@@ -41,7 +41,7 @@ namespace CineBalmis.data.database
             return salas;
         }
 
-        public Salas obtenerSala(int idSala)
+        public Salas obtenerSala(int? idSala)
         {
             Salas sala = new Salas();
             if (existeSala(idSala))
@@ -73,7 +73,7 @@ namespace CineBalmis.data.database
             return sala;
         }
 
-        public int ocupacionSala(int idSala)
+        public int ocupacionSala(int? idSala)
         {
             int ocupacion = 0;
 

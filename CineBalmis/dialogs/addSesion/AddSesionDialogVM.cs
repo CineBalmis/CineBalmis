@@ -17,7 +17,7 @@ namespace CineBalmis.dialogs.addSesion
     {
         // Servicios
         private DAOSesiones daoSesiones;
-        private DAOSalas daoSalas;
+        private DaoSalas daoSalas;
         private DAOPeliculas daoPeliculas;
 
         // Comandos - Click
@@ -52,9 +52,10 @@ namespace CineBalmis.dialogs.addSesion
 
         private void AddSesionButtonClicked()
         {
-            if (Sesion != daoSesiones.obtenerSesion(Sesion.IdSession) && PeliculaSeleccionada != null && SalaSeleccionada != null)
+            if (Sesion != daoSesiones.obtenerSesion(Sesion.IdSesion) && PeliculaSeleccionada != null && SalaSeleccionada != null)
             {
-                daoSesiones.editarSesion(Sesion.IdSession, PeliculaSeleccionada.IdPelicula, SalaSeleccionada.IdSala, Sesion.Hora);
+                
+                daoSesiones.editarSesion(Sesion);
                 WeakReferenceMessenger.Default.Send(new EditSalaMessageSuccess(true));
             }
 
