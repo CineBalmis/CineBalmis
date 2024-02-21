@@ -14,18 +14,21 @@ namespace CineBalmis.views.peliculas
     internal class PeliculasVM : ObservableObject
     {
         // Servicios
-        private DAOPeliculas dao;
+        private readonly DAOPeliculas dao;
 
-        private ObservableCollection<Peliculas> peliculas;
-        private Peliculas? peliculaSeleccionada = null;
+        private ObservableCollection<data.models.Peliculas>? peliculas;
+        private data.models.Peliculas? peliculaSeleccionada = null;
 
-        public ObservableCollection<Peliculas> Peliculas{ get => peliculas; set => SetProperty(ref peliculas, value); }
-        public Peliculas? PeliculasSeleccionada { get => peliculaSeleccionada; set => SetProperty(ref peliculaSeleccionada, value); }
+        public ObservableCollection<data.models.Peliculas> Peliculas{ get => peliculas ?? new(); set => SetProperty(ref peliculas, value); }
+        public data.models.Peliculas? PeliculasSeleccionada { get => peliculaSeleccionada; set => SetProperty(ref peliculaSeleccionada, value); }
 
         public PeliculasVM() {
             dao = new();
 
-            Peliculas = dao.obtenerPeliculas();
+            Peliculas = dao.ObtenerPeliculas();
+
+
+
         }
         
     }

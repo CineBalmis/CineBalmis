@@ -14,15 +14,16 @@ namespace CineBalmis.data.database
     public class DAOPeliculas
     {
 
-        private SqliteConnection? connection = null;
+        static SqliteConnection connection = Conexion.crearConexion();
+        public DAOPeliculas() { Conexion.cargarDatos(connection); }
 
-        public ObservableCollection<Peliculas> obtenerPeliculas()
+        public ObservableCollection<Peliculas> ObtenerPeliculas()
         {
             //Consulta de selección
-            SqliteCommand comando = connection.CreateCommand();
+            SqliteCommand comando = connection!.CreateCommand() ?? new();
             comando.CommandText = "SELECT * FROM peliculas";
             SqliteDataReader lector = comando.ExecuteReader();
-            ObservableCollection<Peliculas> peliculas = new ObservableCollection<Peliculas>();
+            ObservableCollection<Peliculas> peliculas = new();
             if (lector.HasRows)
             {
                 while (lector.Read())
@@ -33,7 +34,7 @@ namespace CineBalmis.data.database
                     int anyo = lector.GetInt32(3);
                     String genero = lector.GetString(4);
                     String calificacion = lector.GetString(5);
-                    Peliculas pelicula = new Peliculas(idPelicula, titulo, cartel, anyo, genero, calificacion);
+                    Peliculas pelicula = new(idPelicula, titulo, cartel, anyo, genero, calificacion);
                     peliculas.Add(pelicula);
                 }
             }
@@ -43,10 +44,10 @@ namespace CineBalmis.data.database
             return peliculas;
         }
 
-        public Peliculas obtenerPelicula(int idPelicula)
+        public Peliculas ObtenerPelicula(int idPelicula)
         {
-            Peliculas pelicula = new Peliculas();
-            if (existePelicula(idPelicula))
+            Peliculas pelicula = new();
+            if (ExistePelicula(idPelicula))
             {
                 //Abrir la conexión
                 connection = Conexion.crearConexion();
@@ -79,7 +80,7 @@ namespace CineBalmis.data.database
             return pelicula;
         }
 
-        public bool existePelicula(int idPelicula)
+        public bool ExistePelicula(int idPelicula)
         {
             //Abrir la conexión
             connection = Conexion.crearConexion();

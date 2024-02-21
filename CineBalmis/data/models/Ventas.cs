@@ -28,14 +28,14 @@ namespace CineBalmis.data.models
             get { return cantidad; }
             set { SetProperty(ref cantidad, value); }
         }
-        private tipoPago pago;
-        public tipoPago Pago
+        private TipoPago pago;
+        public TipoPago Pago
         {
             get { return pago; }
             set { SetProperty(ref pago, value); }
         }
 
-        public enum tipoPago
+        public enum TipoPago
         {
             Efectivo, Tarjeta, Bizum, Indefinido
         }
@@ -45,15 +45,14 @@ namespace CineBalmis.data.models
             IdVenta = idVenta;
             Sesion = sesion;
             Cantidad = cantidad;
-            Pago = parseTipoPago(pago);
+            Pago = ParseTipoPago(pago);
         }
-        private tipoPago parseTipoPago(string pago)
+        private static TipoPago ParseTipoPago(string pago)
         {
-            tipoPago tipoPagoParseado;
 
-            if (!Enum.TryParse(pago, true, out tipoPagoParseado))
+            if (!Enum.TryParse(pago, true, out TipoPago tipoPagoParseado))
             {
-                tipoPagoParseado = tipoPago.Indefinido;
+                tipoPagoParseado = TipoPago.Indefinido;
             }
             return tipoPagoParseado;
         }

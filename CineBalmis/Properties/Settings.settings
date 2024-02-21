@@ -2,17 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CineBalmis.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-<<<<<<< HEAD
-    <Setting Name="claveSyncfusion" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">MzA3OTg0N0AzMjM0MmUzMDJlMzBiRFZjNFYyS2txK3QrN2E0bnlDanRVcEhabHlSMk9oditZZHYrdm5jWG9zPQ==
-
-MzA3OTg0N0AzMjM0MmUzMDJlMzBiRFZjNFYyS2txK3QrN2E0bnlDanRVcEhabHlSMk9oditZZHYrdm5jWG9zPQ==
-
-MzA3OTg0N0AzMjM0MmUzMDJlMzBiRFZjNFYyS2txK3QrN2E0bnlDanRVcEhabHlSMk9oditZZHYrdm5jWG9zPQ==</Value>
-=======
     <Setting Name="Clave" Type="System.String" Scope="Application">
       <Value Profile="(Default)">MzA3OTg0N0AzMjM0MmUzMDJlMzBiRFZjNFYyS2txK3QrN2E0bnlDanRVcEhabHlSMk9oditZZHYrdm5jWG9zPQ==</Value>
->>>>>>> 5807ba4e283cb3fdcf5f6b293de571ce110f9897
     </Setting>
   </Settings>
 </SettingsFile>

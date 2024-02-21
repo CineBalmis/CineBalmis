@@ -16,20 +16,20 @@ namespace CineBalmis.data.models
             get { return idSala; } 
             set { SetProperty(ref idSala, value);} 
         }
-        private string numero;
-        public string Numero 
+        private string? numero;
+        public string? Numero 
         { 
             get { return numero; } 
             set { SetProperty(ref numero, value);} 
         }
-        private int capacidad;
-        public int Capacidad
+        private int? capacidad;
+        public int? Capacidad
         {
             get { return capacidad; }
             set { SetProperty(ref capacidad, value);}
         }
-        private bool disponible;
-        public bool Disponible
+        private bool? disponible;
+        public bool? Disponible
         {
             get { return disponible;} 
             set {  SetProperty(ref disponible, value);}

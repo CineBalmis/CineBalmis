@@ -21,11 +21,12 @@ namespace CineBalmis.views.entradas
     /// </summary>
     public partial class Entradas : UserControl
     {
-        private EntradasVM vm;
+        private readonly EntradasVM vm;
         public Entradas()
         {
             InitializeComponent();
-
+            vm = new();
+            this.DataContext = vm;
         }
     }
 }
