@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace CineBalmis.dialogs.editSesion
 {
-    internal class EditSesionDialogVM: ObservableObject
+    internal class EditSesionDialogVM : ObservableObject
     {
         // Servicios
-        private DAOSesiones dao;
+        private readonly DAOSesiones dao;
 
         // Comandos - Click
-        public RelayCommand EditSesionButtonClick { get; }
+        public RelayCommand? EditSesionButtonClick { get; }
 
-        private Sesiones sesion;
+        private data.models.Sesiones? sesion;
 
-        public Sesiones Sesion { get => sesion; set => SetProperty(ref sesion, value); }
+        public data.models.Sesiones? Sesion { get => sesion ?? new(); set => SetProperty(ref sesion, value); }
 
         public EditSesionDialogVM()
         {
@@ -31,9 +31,9 @@ namespace CineBalmis.dialogs.editSesion
 
         private void EditSesionButtonClicked()
         {
-            if(dao.obtenerSesion(sesion.IdSession) != Sesion)
+            if (Sesion != null  && dao.obtenerSesion(Sesion!.IdSesion) != Sesion)
             {
-                dao.editarSesion(sesion.IdSession, sesion.Pelicula, sesion.Sala, sesion.Hora);
+                dao.editarSesion(Sesion);
             }
         }
     }

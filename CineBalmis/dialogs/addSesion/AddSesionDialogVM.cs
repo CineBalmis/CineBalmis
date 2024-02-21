@@ -44,8 +44,8 @@ namespace CineBalmis.dialogs.addSesion
 
             AddSesionButtonClick = new(AddSesionButtonClicked);
 
-            ListaSalas = daoSalas.obtenerSalas();
-            ListaPeliculas = daoPeliculas.obtenerPeliculas();
+            ListaSalas = daoSalas.ObtenerSalas();
+            ListaPeliculas = daoPeliculas.ObtenerPeliculas();
 
             WeakReferenceMessenger.Default.Register<SeleccionadaSesionMessage>(this, (r, m) => Sesion = m.Value); ;
         }

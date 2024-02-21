@@ -45,7 +45,7 @@ namespace CineBalmis.views.salas
         }
         private void CargarSalas()
         {
-            Salas = dao.obtenerSalas();
+            Salas = dao.ObtenerSalas();
         }
     }
 }

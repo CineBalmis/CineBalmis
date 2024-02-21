@@ -51,7 +51,7 @@ namespace CineBalmis
 
             WeakReferenceMessenger.Default.Register<SeleccionadoTipoTrabajadorMessage>(this, (r, m) => { CargarBotones(m.Value); });
 
-            dao.borrarVentas();
+            dao.BorrarVentas();
 
             // Reset del programa
             SalirSesion();

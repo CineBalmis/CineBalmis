@@ -12,14 +12,15 @@ namespace CineBalmis.data.database
 {
     public class DAOVentas
     {
-        static SqliteConnection connection = Conexion.crearConexion();
-        public ObservableCollection<Ventas> obtenerVentas()
+        private  readonly SqliteConnection connection = Conexion.crearConexion();
+        public DAOVentas() { Conexion.cargarDatos(connection); }
+        public ObservableCollection<Ventas> ObtenerVentas()
         {
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "SELECT * FROM ventas";
             SqliteDataReader lector = comando.ExecuteReader();
-            ObservableCollection<Ventas> ventas = new ObservableCollection<Ventas>();
+            ObservableCollection<Ventas> ventas = new();
             if (lector.HasRows)
             {
 
@@ -30,7 +31,7 @@ namespace CineBalmis.data.database
                     int cantidad = lector.GetInt32(2);
                     String pago = lector.GetString(3);
 
-                    Ventas venta = new Ventas(idVenta, sesion, cantidad, pago);
+                    Ventas venta = new(idVenta, sesion, cantidad, pago);
                     ventas.Add(venta);
 
                 }
@@ -45,10 +46,10 @@ namespace CineBalmis.data.database
             return ventas;
         }
 
-        public Ventas obtenerVenta(int idVenta)
+        public Ventas ObtenerVenta(int idVenta)
         {
-            Ventas venta = new Ventas();
-            if (existeVenta(idVenta))
+            Ventas venta = new();
+            if (ExisteVenta(idVenta))
             {
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
@@ -79,9 +80,8 @@ namespace CineBalmis.data.database
             return venta;
         }
 
-        public bool crearVenta(int? sesion, int cantidad, string pago)
+        public bool CrearVenta(int? sesion, int cantidad, string pago)
         {
-            bool hecho = false;
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "INSERT INTO sesiones VALUES (null, @sesion, @cantidad, @pago)";
             comando.Parameters.Add("@sesion", SqliteType.Integer);
@@ -91,25 +91,24 @@ namespace CineBalmis.data.database
             comando.Parameters["@cantidad"].Value = cantidad;
             comando.Parameters["@pago"].Value = pago;
 
-            hecho = comando.ExecuteNonQuery() > 0;
+            bool hecho = comando.ExecuteNonQuery() > 0;
 
             return hecho;
         }
 
-        public bool borrarVentas()
+        public bool BorrarVentas()
         {
-            bool hecho = false;
             SqliteCommand comando = connection.CreateCommand();
             comando.CommandText = "DELETE FROM ventas";
 
-            hecho = comando.ExecuteNonQuery() > 0;
+            bool hecho = comando.ExecuteNonQuery() > 0;
 
             return hecho;
         }
 
 
 
-        public bool existeVenta(int idVenta)
+        public bool ExisteVenta(int idVenta)
         {
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();

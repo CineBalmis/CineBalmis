@@ -5,15 +5,24 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>assets\cinema_12223.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="assets\fondo_pantalla_cine_balmis.jpg" />
+    <None Remove="data\database\cinebalmis.db" />
+    <None Remove="data\database\cinebalmis.db.sql" />
     <None Remove="fondo_pantalla_cine_balmis.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="assets\cinema_12223.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="assets\fondo_pantalla_cine_balmis.jpg" />
+    <Resource Include="data\database\cinebalmis.db" />
+    <Resource Include="data\database\cinebalmis.db.sql" />
     <Resource Include="fondo_pantalla_cine_balmis.jpg" />
   </ItemGroup>
 
