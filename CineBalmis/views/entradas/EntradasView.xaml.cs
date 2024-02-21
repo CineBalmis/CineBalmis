@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CineBalmis.views.Entradas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace CineBalmis.views.entradas
     /// </summary>
     public partial class EntradasView : UserControl
     {
+        private readonly EntradasVM vm;
         public EntradasView()
         {
             InitializeComponent();
+            vm = new();
+            DataContext = vm;
         }
     }
 }

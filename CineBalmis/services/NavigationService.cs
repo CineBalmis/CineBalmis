@@ -3,7 +3,7 @@ using CineBalmis.dialogs.addSesion;
 using CineBalmis.dialogs.addVentas;
 using CineBalmis.dialogs.editSalas;
 using CineBalmis.dialogs.editSesion;
-using CineBalmis.views;
+using CineBalmis.views.inicio;
 using CineBalmis.views.entradas;
 using CineBalmis.views.ocupacion;
 using CineBalmis.views.peliculas;

@@ -66,6 +66,18 @@ namespace CineBalmis
         private void CargarBotones(string tipoEmpleado)
         {
             Empleado = tipoEmpleado;
+            if (Empleado.Equals("Trabajador"))
+            {
+                NavegarAOcupacion();
+            }
+            else if(Empleado.Equals("Gestor"))
+            {
+                NavegarAPeliculas();
+            }
+            else
+            {
+                NavegarAInicio();
+            }
         }
 
         // Implementacion metodos Navegacion
@@ -73,7 +85,7 @@ namespace CineBalmis
 
         // Implementacion metodos Comandos - Navegacion
         private void NavegarAPeliculas() { 
-            if (Empleado!.Equals("Gestor")){ 
+            if (Empleado.Equals("Gestor")){ 
                 ContenidoVista = navegacionService.CargarPeliculasView(); 
             } else { 
                 MessageBox.Show("Acceso no autorizado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error); 
@@ -81,7 +93,7 @@ namespace CineBalmis
         }
         private void NavegarASalas() { 
 
-            if (Empleado!.Equals("Gestor"))
+            if (Empleado.Equals("Gestor"))
             {
                 ContenidoVista = navegacionService.CargarSalasView();
             }
