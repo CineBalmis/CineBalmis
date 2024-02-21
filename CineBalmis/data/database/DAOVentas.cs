@@ -79,7 +79,7 @@ namespace CineBalmis.data.database
             return venta;
         }
 
-        public bool crearVenta(int sesion, int cantidad, string pago)
+        public bool crearVenta(int? sesion, int cantidad, string pago)
         {
             bool hecho = false;
             SqliteCommand comando = connection.CreateCommand();

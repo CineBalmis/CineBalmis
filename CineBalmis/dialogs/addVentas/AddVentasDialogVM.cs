@@ -17,7 +17,7 @@ namespace CineBalmis.dialogs.addVentas
         // Servicios
         private DAOVentas daoVentas;
         private DAOSesiones daoSesiones;
-        private DAOSalas daoSalas;
+        private DaoSalas daoSalas;
 
         // Comando - Click
         public RelayCommand GuardarVentaClick {get;}
@@ -56,7 +56,7 @@ namespace CineBalmis.dialogs.addVentas
                 }
                 else
                 {
-                    daoVentas.crearVenta(SesionSeleccionada.IdSession, Cantidad, Metodo);
+                    daoVentas.crearVenta(SesionSeleccionada.IdSesion, Cantidad, Metodo);
                     MessageBox.Show("Se ha guardado las nuevas ventas", "Registro Guardado", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
