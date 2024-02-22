@@ -10,21 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CineBalmis.views
+namespace CineBalmis.dialogs.addSesion
 {
     /// <summary>
-    /// Lógica de interacción para InicioView.xaml
+    /// Lógica de interacción para AddSesionDialog.xaml
     /// </summary>
-    public partial class InicioView : UserControl
+    public partial class AddSesionDialog : Window
     {
-        private InicioVM vm;
-        public InicioView()
+        private AddSesionDialogVM vm;
+        public AddSesionDialog()
         {
             InitializeComponent();
-            vm = new();
+            vm = new AddSesionDialogVM();
             this.DataContext = vm;
         }
     }

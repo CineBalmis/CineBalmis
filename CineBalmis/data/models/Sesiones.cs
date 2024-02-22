@@ -10,11 +10,11 @@ namespace CineBalmis.data.models
 {
     public class Sesiones : ObservableObject
     {
-        private int idSession;
-        public int IdSession
+        private int? idSesion;
+        public int? IdSesion
         {
-            get { return idSession; }
-            set { SetProperty(ref idSession, value); }
+            get { return idSesion; }
+            set { SetProperty(ref idSesion, value); }
         }
         private int pelicula;
         public int Pelicula
@@ -28,22 +28,20 @@ namespace CineBalmis.data.models
             get { return sala; }
             set { SetProperty(ref sala, value); }
         }
-        private String hora;
-        public String Hora
+        private string hora;
+        public string Hora
         {
             get { return hora; }
             set { SetProperty(ref hora, value); }
         }
-        private ObservableCollection<Ventas>? ventas;
-        public ObservableCollection<Ventas>? Ventas { get { return ventas; } set { SetProperty(ref ventas, value); } }
+
         public Sesiones() { }
-        public Sesiones(int idSession, int pelicula, int sala, string hora, ObservableCollection<Ventas> ventas)
+        public Sesiones(int? idSesion, int pelicula, int sala, string hora)
         {
-            IdSession = idSession;
+            IdSesion = idSesion;
             Pelicula = pelicula;
             Sala = sala;
             Hora = hora;
-            Ventas = ventas;
         }
     }
 }

@@ -10,32 +10,32 @@ namespace CineBalmis.data.models
 {
     public class Peliculas : ObservableObject
     {
-        private int idPelicula;
-        public int IdPelicula
+        private int? idPelicula;
+        public int? IdPelicula
         {
             get { return idPelicula; }
             set { SetProperty(ref idPelicula, value); }
         }
-        private string titulo;
-        public string Titulo
+        private string? titulo;
+        public string? Titulo
         {
             get { return titulo; }
             set { SetProperty(ref titulo, value); }
         }
 
-        private string cartel;
-        public string Cartel
+        private string? cartel;
+        public string? Cartel
         {
             get { return cartel; }
             set { SetProperty (ref cartel, value); }
         }
-        private int anyo;
-        public int Anyo
+        private int? anyo;
+        public int? Anyo
         {
             get { return anyo; } set { SetProperty(ref anyo, value);}
         }
-        private string genero;
-        public string Genero
+        private Generos? genero;
+        public Generos? Genero
         {
             get { return genero; }
             set
@@ -43,38 +43,53 @@ namespace CineBalmis.data.models
                 SetProperty(ref genero, value);
             }
         }
-        private string calificacion;
-        public string Calificacion
+        private Calificaciones? calificacion;
+        public Calificaciones? Calificacion
         {
             get { return calificacion; }
             set { SetProperty(ref calificacion, value); }
         }
-
-        private ObservableCollection<Sesiones>? sesiones;
-        public ObservableCollection<Sesiones>? Sesiones { get { return sesiones; } set { SetProperty(ref sesiones, value); } }
         public enum Generos
         {
-            Drama, Comedia, Acción, Trhiller, Terror,Animación
+            Drama, Comedia, Acción, Thriller, Terror, Animación, Indefinido
         }
         public enum Calificaciones
         {
             NRM_7, NRM_12, NRM_16,
-            NRM_18 ,APTA_TP
+            NRM_18 ,APTA_TP, INDEFINIDO
         }
         public Peliculas()
         {
 
         }
 
-        public Peliculas(int idPelicula, string titulo, string cartel, int anyo, string genero, string calificacion, ObservableCollection<Sesiones> sesiones)
+        public Peliculas(int? idPelicula, string titulo, string cartel, int anyo, string genero, string calificacion)
         {
             IdPelicula = idPelicula;
             Titulo = titulo;
             Cartel = cartel;
             Anyo = anyo;
-            Genero = genero;
-            Calificacion = calificacion;
-            Sesiones = sesiones;
+            Genero = ParseGeneros(genero);
+            Calificacion = ParseCalificaciones(calificacion);
+        }
+
+        private Generos ParseGeneros(string genero)
+        {
+            if (!Enum.TryParse(genero, true, out Generos generoParseado))
+            {
+                generoParseado = Generos.Indefinido;
+            }
+            return generoParseado;
+        }
+
+        private Calificaciones ParseCalificaciones(string calificacion)
+        {
+
+            if (!Enum.TryParse(calificacion, true, out Calificaciones calificacionParseada))
+            {
+                calificacionParseada = Calificaciones.INDEFINIDO;
+            }
+            return calificacionParseada;
         }
     }
 }

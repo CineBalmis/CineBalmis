@@ -5,19 +5,79 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="assets\CineBalmisDocumentacion.hnd" />
+    <None Remove="assets\empleado.ico" />
+    <None Remove="assets\exit.ico" />
+    <None Remove="assets\fondo_pantalla_cine_balmis.jpg" />
+    <None Remove="assets\help.ico" />
+    <None Remove="assets\manager.ico" />
+    <None Remove="assets\movies.ico" />
+    <None Remove="assets\ocupacion.ico" />
+    <None Remove="assets\sala.ico" />
+    <None Remove="assets\sesiones.ico" />
+    <None Remove="assets\ticket.ico" />
+    <None Remove="assets\usuario.ico" />
+    <None Remove="data\database\cinebalmis.db" />
+    <None Remove="data\database\cinebalmis.db.sql" />
+    <None Remove="icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="assets\cinema_12223.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="assets\CineBalmisDocumentacion.hnd" />
+    <Resource Include="assets\empleado.ico" />
+    <Resource Include="assets\exit.ico" />
+    <Resource Include="assets\fondo_pantalla_cine_balmis.jpg" />
+    <Resource Include="assets\help.ico" />
+    <Resource Include="assets\manager.ico" />
+    <Resource Include="assets\movies.ico" />
+    <Resource Include="assets\ocupacion.ico" />
+    <Resource Include="assets\sala.ico" />
+    <Resource Include="assets\sesiones.ico" />
+    <Resource Include="assets\ticket.ico" />
+    <Resource Include="assets\usuario.ico" />
+    <Resource Include="data\database\cinebalmis.db" />
+    <Resource Include="data\database\cinebalmis.db.sql" />
+    <Resource Include="icon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.2" />
     <PackageReference Include="RestSharp" Version="110.2.0" />
+    <PackageReference Include="Syncfusion.Licensing" Version="24.2.7" />
+    <PackageReference Include="Syncfusion.SfNavigationDrawer.WPF" Version="24.2.7" />
+    <PackageReference Include="Syncfusion.Shared.WPF" Version="24.2.7" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="data\models\" />
-    <Folder Include="services\" />
-    <Folder Include="views\" />
-    <Folder Include="assets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

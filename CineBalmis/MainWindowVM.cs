@@ -1,56 +1,46 @@
 
-﻿using CineBalmis.services;
+using CineBalmis.data.database;
+using CineBalmis.services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
+using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 
 namespace CineBalmis
 {
     internal class MainWindowVM : ObservableObject
     {
         // Comandos - Click
-        public RelayCommand SalirButtonClick;
-        public RelayCommand GestorButtonClick;
-        public RelayCommand TrabajadorButtonClick;
+        public RelayCommand SalirButtonClick { get; set; }
 
         // Comandos - Navegacion
-        public RelayCommand NavegarAPeliculasClick;
-        public RelayCommand NavegarASesionesClick;
-        public RelayCommand NavegarASalasClick;
-        public RelayCommand NavegarAEntradasClick;
-        public RelayCommand NavegarAOcupacionClick;
+        public RelayCommand NavegarAPeliculasClick { get; set; }
+        public RelayCommand NavegarASesionesClick { get; set; }
+        public RelayCommand NavegarASalasClick { get; set; }
+        public RelayCommand NavegarAEntradasClick { get; set; }
+        public RelayCommand NavegarAOcupacionClick { get; set; }
 
         // Servicios
-
-        // Servicios - Navegacion
-        private services.NavigationService NavigationService;
-
+        private NavigationService navegacionService;
+        private DAOVentas dao;
 
         // Referencias a variables
-        private string empleado;
-        private Button[] botonesNavegacion;
-        private UserControl vistaSeleccionada;
+        private string? empleado = null;
+        private UserControl? contenidoVista = null;
 
-        public string Empleado { get => empleado; set => SetProperty(ref empleado, value); }
-        public Button[] BotonesNavegacion { get => botonesNavegacion; set => SetProperty(ref botonesNavegacion, value); }
-        public UserControl VistaSeleccionada { get => vistaSeleccionada; set => SetProperty(ref vistaSeleccionada, value); }
+        public string? Empleado { get => empleado; set => SetProperty(ref empleado, value); }
+        public UserControl? ContenidoVista { get => contenidoVista; set => SetProperty(ref contenidoVista, value); }
 
         public MainWindowVM()
         {
             // Inicializar Servicios
-            NavigationService = new();
+            navegacionService = new();
+            dao = new();
 
             // Comandos - Click
             SalirButtonClick = new(SalirSesion);
-            GestorButtonClick = new(GestorBotones);
-            TrabajadorButtonClick = new(TrabajadorBotones);
 
             // Comandos - Navegacion
             NavegarAPeliculasClick = new(NavegarAPeliculas);
@@ -58,6 +48,10 @@ namespace CineBalmis
             NavegarASalasClick = new(NavegarASesiones);
             NavegarAEntradasClick = new(NavegarAEntradas);
             NavegarAOcupacionClick = new(NavegarAOcupacion);
+
+            WeakReferenceMessenger.Default.Register<SeleccionadoTipoTrabajadorMessage>(this, (r, m) => { CargarBotones(m.Value); });
+
+            dao.BorrarVentas();
 
             // Reset del programa
             SalirSesion();
@@ -72,60 +66,71 @@ namespace CineBalmis
         private void CargarBotones(string tipoEmpleado)
         {
             Empleado = tipoEmpleado;
-            List<Button> botones = new();
-            if (empleado.Equals("Gestor"))
+            if (Empleado.Equals("Trabajador"))
             {
-                Button b = new()
-                {
-                    Content = "Peliculas",
-                    Command = NavegarAPeliculasClick
-                };
-                botones.Add(b);
-
-                Button b1 = new()
-                {
-                    Content = "Sesiones",
-                    Command = NavegarASesionesClick,
-                };
-                botones.Add(b1);
-
-                Button b2 = new()
-                {
-                    Content = "Salas",
-                    Command = NavegarASalasClick
-                };
-                botones.Add(b2);
+                NavegarAOcupacion();
             }
-            else if (empleado.Equals("Trabajador"))
+            else if(Empleado.Equals("Gestor"))
             {
-                Button b1 = new()
-                {
-                    Content = "Entradas",
-                    Command = NavegarAEntradasClick
-                };
-                botones.Add(b1);
-                Button b2 = new()
-                {
-                    Content = "Ocupacion",
-                    Command = NavegarAOcupacionClick
-                };
-                botones.Add(b1);
+                NavegarAPeliculas();
             }
-            BotonesNavegacion = botones.ToArray();
+            else
+            {
+                NavegarAInicio();
+            }
         }
 
-        private void GestorBotones() { CargarBotones("Gestor"); }
-        private void TrabajadorBotones() { CargarBotones("Trabajador"); }
-
         // Implementacion metodos Navegacion
-        private void NavegarAInicio() { VistaSeleccionada = NavigationService.CargarInicioView(); }
+        private void NavegarAInicio() { ContenidoVista = navegacionService.CargarInicioView(); }
 
         // Implementacion metodos Comandos - Navegacion
-        private void NavegarAPeliculas() { }
-        private void NavegarASalas() { }
-        private void NavegarASesiones() { }
-        private void NavegarAEntradas() { }
-        private void NavegarAOcupacion() { }
-       
+        private void NavegarAPeliculas() { 
+            if (Empleado.Equals("Gestor")){ 
+                ContenidoVista = navegacionService.CargarPeliculasView(); 
+            } else { 
+                MessageBox.Show("Acceso no autorizado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error); 
+            }
+        }
+        private void NavegarASalas() { 
+
+            if (Empleado.Equals("Gestor"))
+            {
+                ContenidoVista = navegacionService.CargarSalasView();
+            }
+            else
+            {
+                MessageBox.Show("Acceso no autorizado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void NavegarASesiones() { 
+            if (Empleado!.Equals("Gestor"))
+            {
+                ContenidoVista = navegacionService.CargarSesionesView();
+            }
+            else
+            {
+                MessageBox.Show("Acceso no autorizado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void NavegarAEntradas() { ContenidoVista = navegacionService.CargarEntradasView();
+            if (Empleado!.Equals("Trabajador"))
+            {
+                ContenidoVista = navegacionService.CargarEntradasView();
+            }
+            else
+            {
+                MessageBox.Show("Acceso no autorizado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void NavegarAOcupacion() { 
+            if (Empleado!.Equals("Trabajador"))
+            {
+                ContenidoVista = navegacionService.CargarOcupacionView();
+            }
+            else
+            {
+                MessageBox.Show("Acceso no autorizado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

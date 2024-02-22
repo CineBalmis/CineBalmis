@@ -4,48 +4,65 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CineBalmis"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:Syncfusion="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
         mc:Ignorable="d"
         Title="CineBalmis" Height="450" Width="800" MinHeight="225" MinWidth="400">
 
     <Window.Resources>
-        <Style x:Key="estiloTitulo" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="27"></Setter>
-            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
-        </Style>
-        <Style x:Key="estiloBotonSalir" TargetType="Button">
-            <Setter Property="Width" Value="50"></Setter>
-            <Setter Property="Height" Value="25"></Setter>
-            <Setter Property="Margin" Value="5"></Setter>
-        </Style>
     </Window.Resources>
-
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="assets/fondo_pantalla_cine_balmis.jpg"></ImageBrush>
-        </Grid.Background>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="9*"></ColumnDefinition>
-            <ColumnDefinition Width="41*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="9*"></RowDefinition>
-            <RowDefinition Height="53*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <TextBlock  Style="{StaticResource estiloTitulo}">Cine Balmis</TextBlock>
-        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock VerticalAlignment="Center">
-                    <Run>Bienvenido, </Run>
-                    <Run Text="{Binding Path=Empleado}"></Run>
-            </TextBlock>
-            <Button Style="{StaticResource estiloBotonSalir}">Salir</Button>
-        </StackPanel>
-
-        <Border Margin="15" BorderBrush="Black" BorderThickness="3" Grid.Column="1" Grid.Row="1" CornerRadius="10">
-            <ContentControl Content="{Binding Path=ContenidoVista}">
-
-            </ContentControl>
-        </Border>
-
-    </Grid>
+    <DockPanel>
+        <syncfusion:SfNavigationDrawer
+                    DisplayMode="Compact"
+                    DockPanel.Dock="Left"
+                    >
+            <syncfusion:NavigationItem
+                Header="Entradas"
+                Command="{Binding NavegarAEntradasClick}">
+                <syncfusion:NavigationItem.Icon>
+                    <Image Source="/assets/ticket.ico"></Image>
+                </syncfusion:NavigationItem.Icon>
+            </syncfusion:NavigationItem>
+            <syncfusion:NavigationItem
+                Header="Ocupación"
+                Command="{Binding NavegarAOcupacionClick}">
+                <syncfusion:NavigationItem.Icon>
+                    <Image Source="/assets/ocupacion.ico"></Image>
+                </syncfusion:NavigationItem.Icon>
+            </syncfusion:NavigationItem>
+            <syncfusion:SfNavigationDrawer.ContentView>
+                <DockPanel>
+                    <DockPanel.Background>
+                        <ImageBrush ImageSource="/assets/fondo_pantalla_cine_balmis.jpg"></ImageBrush>
+                    </DockPanel.Background>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
+                        <TextBlock Text="Hola, " FontSize="18" Foreground="#fff2f2f2">
+                            <TextBlock.Effect>
+                                <DropShadowEffect
+                                  ShadowDepth="4"
+                                  Direction="330"
+                                  Color="Black"
+                                  Opacity="0.5"
+                                  BlurRadius="4"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock Text="{Binding Empleado}" FontSize="18" Foreground="#fff2f2f2">
+                            <TextBlock.Effect>
+                                <DropShadowEffect
+                                  ShadowDepth="4"
+                                  Direction="330"
+                                  Color="Black"
+                                  Opacity="0.5"
+                                  BlurRadius="4"/>  
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <syncfusion:ButtonAdv FontSize="16" SizeMode="Normal"  VerticalAlignment="Center" SmallIcon="/assets/exit.ico" HorizontalAlignment="Center" Label="Salir" Command="{Binding SalirButtonClick}"  Margin="10,0,0,0"/>
+                    </StackPanel>
+                    <Border DockPanel.Dock="Bottom">
+                        <ContentPresenter Content="{Binding ContenidoVista}"></ContentPresenter>
+                    </Border>
+                </DockPanel>
+            </syncfusion:SfNavigationDrawer.ContentView>
+        </syncfusion:SfNavigationDrawer>
+    </DockPanel>
 </Window>
