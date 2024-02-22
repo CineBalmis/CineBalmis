@@ -1,5 +1,4 @@
-﻿using CineBalmis.views.entradas;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CineBalmis.views.entradas
+namespace CineBalmis.views.logeado
 {
     /// <summary>
-    /// Lógica de interacción para EntradasView.xaml
+    /// Lógica de interacción para Logeado.xaml
     /// </summary>
-    public partial class EntradasView : UserControl
+    public partial class LogeadoView : UserControl
     {
-        public EntradasView()
+        public LogeadoView()
         {
             InitializeComponent();
         }

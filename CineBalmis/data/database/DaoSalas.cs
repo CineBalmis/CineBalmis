@@ -13,7 +13,7 @@ namespace CineBalmis.data.database
     public class DaoSalas
     {
         static readonly SqliteConnection connection = Conexion.crearConexion();
-        public DaoSalas() { Conexion.cargarDatos(connection); }
+        public DaoSalas() { Conexion.CargarDatos(connection); }
         public ObservableCollection<Salas> ObtenerSalas()
         {
             //Consulta de selección
@@ -68,8 +68,6 @@ namespace CineBalmis.data.database
                 }
                 //Cerrar el DataReader
                 lector.Close();
-                //Cerrar la conexión
-                Conexion.cerrarConexion(connection);
             }
             return sala;
         }
