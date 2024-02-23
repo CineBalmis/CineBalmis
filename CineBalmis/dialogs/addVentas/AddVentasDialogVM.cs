@@ -50,13 +50,13 @@ namespace CineBalmis.dialogs.addVentas
         {
             if(SesionSeleccionada != null)
             {
-                if (Cantidad + daoSalas.ocupacionSala(SesionSeleccionada.Sala) > daoSalas.obtenerSala(SesionSeleccionada.Sala).Capacidad)
+                if (Cantidad + daoSalas.OcupacionSala(SesionSeleccionada.Sala) > daoSalas.ObtenerSala(SesionSeleccionada.Sala).Capacidad)
                 {
                     MessageBox.Show("No se puede superar la ocupacion de la sala", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    daoVentas.crearVenta(SesionSeleccionada.IdSesion, Cantidad, Metodo);
+                    daoVentas.CrearVenta(SesionSeleccionada.IdSesion, Cantidad, Metodo);
                     MessageBox.Show("Se ha guardado las nuevas ventas", "Registro Guardado", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }

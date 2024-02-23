@@ -37,10 +37,10 @@ namespace CineBalmis.dialogs.editSalas
 
         private void EditSalasButtonClicked()
         {
-            if (sala != dao.obtenerSala(sala.IdSala))
+            if (sala != dao.ObtenerSala(sala.IdSala))
             {
-                dao.editarSalas(Sala);
-                WeakReferenceMessenger.Default.Send(new EditSalaMessageSuccess(dao.editarSalas(sala)));
+                dao.EditarSalas(Sala);
+                WeakReferenceMessenger.Default.Send(new EditSalaMessageSuccess(dao.EditarSalas(sala)));
                 MessageBox.Show("La informacion de la sala se ha actualizado", "Informacion de la sala", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }

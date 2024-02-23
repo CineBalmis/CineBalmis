@@ -33,7 +33,7 @@ namespace CineBalmis.views.ocupacion
         }
         private void ObtenerOcupacion()
         {
-            ObservableCollection<Salas> salas = dao.obtenerSalas();
+            ObservableCollection<Salas> salas = dao.ObtenerSalas();
 
             foreach (Salas s in salas)
             {
