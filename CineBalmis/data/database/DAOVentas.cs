@@ -13,6 +13,7 @@ namespace CineBalmis.data.database
     public class DAOVentas
     {
         private  readonly SqliteConnection connection = Conexion.CrearConexion();
+
         public DAOVentas() { Conexion.CargarDatos(connection); }
         public ObservableCollection<Ventas> ObtenerVentas()
         {

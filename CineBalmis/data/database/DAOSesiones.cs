@@ -13,6 +13,8 @@ namespace CineBalmis.data.database
     public class DAOSesiones
     {
         static SqliteConnection connection = Conexion.CrearConexion();
+        public DAOSesiones() { Conexion.CargarDatos(connection); }
+      
         public ObservableCollection<Sesiones> obtenerSesiones()
         {
             //Consulta de selección

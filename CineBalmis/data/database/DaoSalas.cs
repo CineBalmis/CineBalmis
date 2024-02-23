@@ -14,6 +14,7 @@ namespace CineBalmis.data.database
     {
         static readonly SqliteConnection connection = Conexion.CrearConexion();
         public DAOSalas() { Conexion.CargarDatos(connection); }
+
         public ObservableCollection<Salas> ObtenerSalas()
         {
             //Consulta de selección
@@ -68,8 +69,6 @@ namespace CineBalmis.data.database
                 }
                 //Cerrar el DataReader
                 lector.Close();
-                //Cerrar la conexión
-                Conexion.CerrarConexion(connection);
             }
             return sala;
         }

@@ -13,8 +13,8 @@ namespace CineBalmis.data.database
 {
     public class DAOPeliculas
     {
-
         static SqliteConnection connection = Conexion.CrearConexion();
+      
         public DAOPeliculas() { Conexion.CargarDatos(connection); }
 
         public ObservableCollection<Peliculas> ObtenerPeliculas()

@@ -10,6 +10,7 @@ using CineBalmis.views.peliculas;
 using CineBalmis.views.salas;
 using CineBalmis.views.sesiones;
 using System.Windows.Controls;
+using CineBalmis.views.logeado;
 
 namespace CineBalmis.services
 {
@@ -22,6 +23,7 @@ namespace CineBalmis.services
         public UserControl CargarSalasView() => new SalasView();
         public UserControl CargarEntradasView() => new EntradasView();
         public UserControl CargarOcupacionView() => new OcupacionView();
+        public UserControl CargarLogeadoView() => new LogeadoView();
 
         // Dialogos
         public AddSesionDialog CargarAddSesionDialog() => new AddSesionDialog();

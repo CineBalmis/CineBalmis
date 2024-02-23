@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace CineBalmis.views.Entradas
+namespace CineBalmis.views.entradas
 {
     internal class EntradasVM : ObservableObject
     {

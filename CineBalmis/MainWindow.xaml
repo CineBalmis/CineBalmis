@@ -8,28 +8,34 @@
         xmlns:Syncfusion="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
         mc:Ignorable="d"
         Title="CineBalmis" Height="450" Width="800" MinHeight="225" MinWidth="400">
-
+    <Window.DataContext>
+        <local:MainWindowVM/> 
+    </Window.DataContext>
     <Window.Resources>
+        <Style x:Key="BotonNavegacion" TargetType="syncfusion:NavigationItem">
+            <Setter Property="IconTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Image
+                            Width="16"
+                            Height="16"
+                            Source="{Binding}" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Command" Value="{Binding Command}">
+            </Setter>
+        </Style>
     </Window.Resources>
     <DockPanel>
         <syncfusion:SfNavigationDrawer
-                    DisplayMode="Compact"
-                    DockPanel.Dock="Left"
-                    >
-            <syncfusion:NavigationItem
-                Header="Entradas"
-                Command="{Binding NavegarAEntradasClick}">
-                <syncfusion:NavigationItem.Icon>
-                    <Image Source="/assets/ticket.ico"></Image>
-                </syncfusion:NavigationItem.Icon>
-            </syncfusion:NavigationItem>
-            <syncfusion:NavigationItem
-                Header="Ocupación"
-                Command="{Binding NavegarAOcupacionClick}">
-                <syncfusion:NavigationItem.Icon>
-                    <Image Source="/assets/ocupacion.ico"></Image>
-                </syncfusion:NavigationItem.Icon>
-            </syncfusion:NavigationItem>
+                x:Name="navigationDrawer"
+                DisplayMemberPath="Name"
+                DisplayMode="Compact"
+                IconMemberPath="Icon" 
+                ItemsSource="{Binding BotonesNavegacion}"
+            ItemContainerStyle="{StaticResource BotonNavegacion}"
+            >
             <syncfusion:SfNavigationDrawer.ContentView>
                 <DockPanel>
                     <DockPanel.Background>
