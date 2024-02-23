@@ -14,6 +14,7 @@ namespace CineBalmis.data.database
     {
         static SqliteConnection connection = Conexion.crearConexion();
         public DAOSesiones() { Conexion.CargarDatos(connection); }
+
         public ObservableCollection<Sesiones> obtenerSesiones()
         {
             //Consulta de selección
@@ -85,8 +86,8 @@ namespace CineBalmis.data.database
         public bool editarSesion(Sesiones sesion)
         {
             bool hecho = false;
-            DaoSalas daoSalas = new DaoSalas();
-            if (!daoSalas.SalaDisponible(sesion.Sala) && existeSesion(sesion.IdSesion) && !salaTiene3Sesiones(sesion.Sala))
+            DAOSalas daoSalas = new DAOSalas();
+            if (!daoSalas.salaDisponible(sesion.Sala) && existeSesion(sesion.IdSesion) && !salaTiene3Sesiones(sesion.Sala))
             {
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
@@ -108,8 +109,8 @@ namespace CineBalmis.data.database
         public bool crearSesion(int pelicula, int sala, string hora)
         {
             bool hecho = false;
-            DaoSalas daoSalas = new DaoSalas();
-            if (!daoSalas.SalaDisponible(sala) && !salaTiene3Sesiones(sala))
+            DAOSalas daoSalas = new DAOSalas();
+            if (!daoSalas.salaDisponible(sala) && !salaTiene3Sesiones(sala))
             {
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();

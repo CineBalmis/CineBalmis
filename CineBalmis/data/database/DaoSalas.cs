@@ -10,10 +10,12 @@ using System.Windows;
 
 namespace CineBalmis.data.database
 {
-    public class DaoSalas
+    public class DAOSalas
     {
         static readonly SqliteConnection connection = Conexion.crearConexion();
+
         public DaoSalas() { Conexion.CargarDatos(connection); }
+
         public ObservableCollection<Salas> ObtenerSalas()
         {
             //Consulta de selección
