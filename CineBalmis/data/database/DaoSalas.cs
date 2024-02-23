@@ -12,9 +12,8 @@ namespace CineBalmis.data.database
 {
     public class DAOSalas
     {
-        static readonly SqliteConnection connection = Conexion.crearConexion();
-
-        public DaoSalas() { Conexion.CargarDatos(connection); }
+        static readonly SqliteConnection connection = Conexion.CrearConexion();
+        public DAOSalas() { Conexion.CargarDatos(connection); }
 
         public ObservableCollection<Salas> ObtenerSalas()
         {
