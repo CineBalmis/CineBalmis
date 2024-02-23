@@ -6,7 +6,25 @@
              xmlns:local="clr-namespace:CineBalmis.views.sesiones"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="plantillaSesion">
+            <StackPanel>
+                <TextBlock VerticalAlignment="Bottom">
+                <Run Text="Pelicula: "></Run>
+                <Run Text="{Binding Path=Pelicula}"></Run>
+                <Run Text=" // "></Run>
+                <Run Text="Sala: "></Run>
+                <Run Text="{Binding Path=Sala}"></Run>
+                <Run Text=" // "></Run>
+                <Run Text="Hora: "></Run>
+                <Run Text="{Binding Path=Hora}"></Run>
+
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
-            
+        <ListBox Margin="10" ItemsSource="{Binding Path=Sesiones}" ItemTemplate="{StaticResource plantillaSesion}" SelectedItem="{Binding Path=SesionSeleccionada}">
+        </ListBox>
     </Grid>
 </UserControl>

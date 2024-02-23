@@ -34,7 +34,7 @@ namespace CineBalmis.dialogs.addSalas
         }
         private void AddSalasButtonClicked()
         {
-            dao.crearSala(Salas.Numero, salas.Capacidad, salas.Disponible ? 1 : 0);
+            dao.CrearSala(Salas.Numero, Salas.Capacidad, 0);
         }
 
         

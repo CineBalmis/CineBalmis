@@ -27,6 +27,7 @@ namespace CineBalmis.views.ocupacion
         public OcupacionVM() {
             dao = new();
             ActualizarButtonClick = new(ObtenerOcupacion);
+            Ocupaciones = new();
 
             ObtenerOcupacion();           
         }
@@ -36,7 +37,9 @@ namespace CineBalmis.views.ocupacion
 
             foreach (Salas s in salas)
             {
-                Ocupaciones.Add((s, dao.ocupacionSala(s.IdSala)));
+
+                (Salas, int) obj = (s, dao.OcupacionSala(s.IdSala));
+                Ocupaciones.Add(obj);
             }
         }
     }

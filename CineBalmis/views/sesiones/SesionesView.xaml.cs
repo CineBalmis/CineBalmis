@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace CineBalmis.views.sesiones
 {
     /// <summary>
-    /// Lógica de interacción para SesionesView.xaml
+    /// Lógica de interacción para Sesiones.xaml
     /// </summary>
     public partial class SesionesView : UserControl
     {

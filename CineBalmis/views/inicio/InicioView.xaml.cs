@@ -12,16 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CineBalmis.views.inicio;
 
-namespace CineBalmis.views
+namespace CineBalmis.views.inicio
 {
     /// <summary>
     /// Lógica de interacción para InicioView.xaml
     /// </summary>
     public partial class InicioView : UserControl
     {
-        private InicioVM vm;
+        private readonly InicioVM vm;
         public InicioView()
         {
             InitializeComponent();
