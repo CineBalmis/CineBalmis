@@ -5,11 +5,30 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace CineBalmis
 {
+    public class Model
+    {
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        private object icon;
+        public object Icon
+        {
+            get { return icon; }
+            set { icon = value; }
+        }
+        private RelayCommand command;
+        public RelayCommand Command { get => command; set => command = value; }
+    }
     internal class MainWindowVM : ObservableObject
     {
         // Comandos - Click
@@ -29,9 +48,11 @@ namespace CineBalmis
         // Referencias a variables
         private string? empleado = null;
         private UserControl? contenidoVista = null;
+        private ObservableCollection<Model>? botonesNavegacion;
 
-        public string? Empleado { get => empleado; set => SetProperty(ref empleado, value); }
+        public string Empleado { get => empleado ?? "Identificate"; set => SetProperty(ref empleado, value); }
         public UserControl? ContenidoVista { get => contenidoVista; set => SetProperty(ref contenidoVista, value); }
+        public ObservableCollection<Model> BotonesNavegacion { get => botonesNavegacion ?? new(); set => SetProperty(ref botonesNavegacion, value); }
 
         public MainWindowVM()
         {
@@ -65,14 +86,24 @@ namespace CineBalmis
 
         private void CargarBotones(string tipoEmpleado)
         {
+            BotonesNavegacion = new();
             Empleado = tipoEmpleado;
             if (Empleado.Equals("Trabajador"))
             {
-                NavegarAOcupacion();
+                BotonesNavegacion.Add(new Model() { Name = "Entradas", Icon = "/assets/ticket.ico", Command = NavegarAEntradasClick });
+                BotonesNavegacion.Add(new Model() { Name = "Ocupacion", Icon = "/assets/ocupacion.ico", Command = NavegarAOcupacionClick });
+                
+                NavegarALogeado();
+                WeakReferenceMessenger.Default.Send(new LogeadoTipoMessage(Empleado));
             }
-            else if(Empleado.Equals("Gestor"))
+            else if (Empleado.Equals("Gestor"))
             {
-                NavegarAPeliculas();
+                BotonesNavegacion.Add(new Model() { Name = "Peliculas", Icon = "/assets/movies.ico", Command = NavegarAPeliculasClick });
+                BotonesNavegacion.Add(new Model() { Name = "Salas", Icon = "/assets/sala.ico", Command = NavegarASalasClick });
+                BotonesNavegacion.Add(new Model() { Name = "Sesiones", Icon = "/assets/sesiones.ico", Command = NavegarASesionesClick });
+                
+                NavegarALogeado();
+                WeakReferenceMessenger.Default.Send(new LogeadoTipoMessage(Empleado));
             }
             else
             {
@@ -82,16 +113,23 @@ namespace CineBalmis
 
         // Implementacion metodos Navegacion
         private void NavegarAInicio() { ContenidoVista = navegacionService.CargarInicioView(); }
+        private void NavegarALogeado() { ContenidoVista = navegacionService.CargarLogeadoView(); }
 
         // Implementacion metodos Comandos - Navegacion
-        private void NavegarAPeliculas() { 
-            if (Empleado.Equals("Gestor")){ 
-                ContenidoVista = navegacionService.CargarPeliculasView(); 
-            } else { 
-                MessageBox.Show("Acceso no autorizado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error); 
+        private void NavegarAPeliculas()
+        {
+            if (Empleado.Equals("Gestor"))
+            {
+                ContenidoVista = navegacionService.CargarPeliculasView();
+            }
+            else
+            {
+                MessageBox.Show("Acceso no autorizado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                NavegarAInicio();
             }
         }
-        private void NavegarASalas() { 
+        private void NavegarASalas()
+        {
 
             if (Empleado.Equals("Gestor"))
             {
@@ -100,9 +138,11 @@ namespace CineBalmis
             else
             {
                 MessageBox.Show("Acceso no autorizado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                NavegarAInicio();
             }
         }
-        private void NavegarASesiones() { 
+        private void NavegarASesiones()
+        {
             if (Empleado!.Equals("Gestor"))
             {
                 ContenidoVista = navegacionService.CargarSesionesView();
@@ -110,9 +150,12 @@ namespace CineBalmis
             else
             {
                 MessageBox.Show("Acceso no autorizado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                NavegarAInicio();
             }
         }
-        private void NavegarAEntradas() { ContenidoVista = navegacionService.CargarEntradasView();
+        private void NavegarAEntradas()
+        {
+            ContenidoVista = navegacionService.CargarEntradasView();
             if (Empleado!.Equals("Trabajador"))
             {
                 ContenidoVista = navegacionService.CargarEntradasView();
@@ -120,9 +163,11 @@ namespace CineBalmis
             else
             {
                 MessageBox.Show("Acceso no autorizado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                NavegarAInicio();
             }
         }
-        private void NavegarAOcupacion() { 
+        private void NavegarAOcupacion()
+        {
             if (Empleado!.Equals("Trabajador"))
             {
                 ContenidoVista = navegacionService.CargarOcupacionView();
@@ -130,6 +175,7 @@ namespace CineBalmis
             else
             {
                 MessageBox.Show("Acceso no autorizado!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                NavegarAInicio();
             }
         }
     }

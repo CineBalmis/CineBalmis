@@ -15,7 +15,7 @@ namespace CineBalmis.data.database
     {
 
         static SqliteConnection connection = Conexion.crearConexion();
-        public DAOPeliculas() { Conexion.cargarDatos(connection); }
+        public DAOPeliculas() { Conexion.CargarDatos(connection); }
 
         public ObservableCollection<Peliculas> ObtenerPeliculas()
         {

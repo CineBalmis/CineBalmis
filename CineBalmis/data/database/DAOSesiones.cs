@@ -13,6 +13,8 @@ namespace CineBalmis.data.database
     public class DAOSesiones
     {
         static SqliteConnection connection = Conexion.crearConexion();
+        public DAOSesiones() { Conexion.CargarDatos(connection); }
+
         public ObservableCollection<Sesiones> obtenerSesiones()
         {
             //Consulta de selección
@@ -40,7 +42,7 @@ namespace CineBalmis.data.database
             lector.Close();
 
             //Cerrar la conexión
-            Conexion.cerrarConexion(connection);
+            Conexion.CerrarConexion(connection);
 
             return sesiones;
         }
@@ -74,7 +76,7 @@ namespace CineBalmis.data.database
                 lector.Close();
 
                 //Cerrar la conexión
-                Conexion.cerrarConexion(connection);
+                Conexion.CerrarConexion(connection);
             }
             
 

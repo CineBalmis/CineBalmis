@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:CineBalmis.views.entradas"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <local:EntradasVM/>
+    </UserControl.DataContext>
     <Grid>
             
     </Grid>

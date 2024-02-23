@@ -13,13 +13,14 @@ namespace CineBalmis.data.database
             return connection;
         }
 
-        public static void cargarDatos(SqliteConnection connection)
+        public static void CargarDatos(SqliteConnection connection)
         {
+            connection.Open();
             string sql = File.ReadAllText("../../../data/database/cinebalmis.db.sql");
             SqliteCommand cmd = new SqliteCommand(sql, connection);
             cmd.ExecuteNonQuery();
         }
-        public static void cerrarConexion(SqliteConnection connection)
+        public static void CerrarConexion(SqliteConnection connection)
         {
             connection.Close();
         }
