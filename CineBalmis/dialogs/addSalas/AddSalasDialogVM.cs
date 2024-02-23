@@ -12,21 +12,21 @@ using System.Threading.Tasks;
 
 namespace CineBalmis.dialogs.addSalas
 {
-    internal class AddSalasDialogVM : ObservableObject
+    internal class AddSalasDialogVM: ObservableObject
     {
         // Servicios
-        private readonly DaoSalas dao;
+        private DAOSalas dao;
 
         // Comandos - Click
         public RelayCommand AddSalasButtonClick { get; }
 
-        private Salas? salas;
+        private Salas salas;
 
-        public Salas Salas { get => salas ?? new(); set => SetProperty(ref salas, value); }
+        public Salas Salas { get => salas; set => SetProperty(ref salas, value); }
 
         public AddSalasDialogVM()
         {
-            dao = new DaoSalas();
+            dao = new DAOSalas();
 
             Salas = new Salas();
 
@@ -37,6 +37,6 @@ namespace CineBalmis.dialogs.addSalas
             dao.CrearSala(Salas.Numero, Salas.Capacidad, 0);
         }
 
-
+        
     }
 }
