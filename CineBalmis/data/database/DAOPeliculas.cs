@@ -13,9 +13,9 @@ namespace CineBalmis.data.database
 {
     public class DAOPeliculas
     {
-
-        static SqliteConnection connection = Conexion.crearConexion();
-        public DAOPeliculas() { Conexion.cargarDatos(connection); }
+        static SqliteConnection connection = Conexion.CrearConexion();
+      
+        public DAOPeliculas() { Conexion.CargarDatos(connection); }
 
         public ObservableCollection<Peliculas> ObtenerPeliculas()
         {
@@ -50,7 +50,7 @@ namespace CineBalmis.data.database
             if (ExistePelicula(idPelicula))
             {
                 //Abrir la conexión
-                connection = Conexion.crearConexion();
+                connection = Conexion.CrearConexion();
 
                 //Consulta de selección
                 SqliteCommand comando = connection.CreateCommand();
@@ -83,7 +83,7 @@ namespace CineBalmis.data.database
         public bool ExistePelicula(int idPelicula)
         {
             //Abrir la conexión
-            connection = Conexion.crearConexion();
+            connection = Conexion.CrearConexion();
 
             //Consulta de selección
             SqliteCommand comando = connection.CreateCommand();

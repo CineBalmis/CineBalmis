@@ -17,15 +17,15 @@ namespace CineBalmis.dialogs.editSalas
     internal class EditSalasDialogVM : ObservableObject
     {
         // Servicios
-        private readonly DaoSalas dao;
+        private DAOSalas dao;
 
         // Comandos - Click
         public RelayCommand EditSalasButtonClick { get; }
 
         // Variables
-        private data.models.Salas? sala;
+        private Salas sala;
 
-        public data.models.Salas Sala { get => sala ?? new(); set => SetProperty(ref sala, value); }
+        public Salas Sala { get => sala; set => SetProperty(ref sala, value); }
 
         public EditSalasDialogVM()
         {
@@ -37,7 +37,7 @@ namespace CineBalmis.dialogs.editSalas
 
         private void EditSalasButtonClicked()
         {
-            if (sala != dao.ObtenerSala(sala!.IdSala))
+            if (sala != dao.ObtenerSala(sala.IdSala))
             {
                 dao.EditarSalas(Sala);
                 WeakReferenceMessenger.Default.Send(new EditSalaMessageSuccess(dao.EditarSalas(sala)));

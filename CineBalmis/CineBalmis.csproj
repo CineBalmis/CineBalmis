@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\carteles\Borat.jpg" />
+    <None Remove="assets\carteles\Buscando_A_Nemo.jpg" />
+    <None Remove="assets\carteles\El_Indomable_Will_Hunting.jpg" />
+    <None Remove="assets\carteles\El_Resplandor.png" />
+    <None Remove="assets\carteles\Oppenheimer.jpg" />
+    <None Remove="assets\carteles\Rocky.jpg" />
     <None Remove="assets\CineBalmisDocumentacion.hnd" />
     <None Remove="assets\empleado.ico" />
     <None Remove="assets\exit.ico" />
@@ -31,13 +37,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="assets\cinema_12223.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Resource Include="assets\carteles\Borat.jpg" />
+    <Resource Include="assets\carteles\Buscando_A_Nemo.jpg" />
+    <Resource Include="assets\carteles\El_Indomable_Will_Hunting.jpg" />
+    <Resource Include="assets\carteles\El_Resplandor.png" />
+    <Resource Include="assets\carteles\Oppenheimer.jpg" />
+    <Resource Include="assets\carteles\Rocky.jpg" />
     <Resource Include="assets\CineBalmisDocumentacion.hnd" />
     <Resource Include="assets\empleado.ico" />
     <Resource Include="assets\exit.ico" />
+    <Resource Include="assets\cinema_12223.ico" />
     <Resource Include="assets\fondo_pantalla_cine_balmis.jpg" />
     <Resource Include="assets\help.ico" />
     <Resource Include="assets\manager.ico" />

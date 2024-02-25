@@ -12,8 +12,9 @@ namespace CineBalmis.data.database
 {
     public class DAOSesiones
     {
-        static SqliteConnection connection = Conexion.crearConexion();
-        public DAOSesiones() { Conexion.cargarDatos(connection); }
+        static SqliteConnection connection = Conexion.CrearConexion();
+        public DAOSesiones() { Conexion.CargarDatos(connection); }
+      
         public ObservableCollection<Sesiones> obtenerSesiones()
         {
             //Consulta de selección
@@ -41,7 +42,7 @@ namespace CineBalmis.data.database
             lector.Close();
 
             //Cerrar la conexión
-            Conexion.cerrarConexion(connection);
+            Conexion.CerrarConexion(connection);
 
             return sesiones;
         }
@@ -75,7 +76,7 @@ namespace CineBalmis.data.database
                 lector.Close();
 
                 //Cerrar la conexión
-                Conexion.cerrarConexion(connection);
+                Conexion.CerrarConexion(connection);
             }
             
 
@@ -85,7 +86,7 @@ namespace CineBalmis.data.database
         public bool editarSesion(Sesiones sesion)
         {
             bool hecho = false;
-            DaoSalas daoSalas = new DaoSalas();
+            DAOSalas daoSalas = new DAOSalas();
             if (!daoSalas.SalaDisponible(sesion.Sala) && existeSesion(sesion.IdSesion) && !salaTiene3Sesiones(sesion.Sala))
             {
                 //Consulta de selección
@@ -108,7 +109,7 @@ namespace CineBalmis.data.database
         public bool crearSesion(int pelicula, int sala, string hora)
         {
             bool hecho = false;
-            DaoSalas daoSalas = new DaoSalas();
+            DAOSalas daoSalas = new DAOSalas();
             if (!daoSalas.SalaDisponible(sala) && !salaTiene3Sesiones(sala))
             {
                 //Consulta de selección

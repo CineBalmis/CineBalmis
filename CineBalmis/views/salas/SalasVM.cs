@@ -16,7 +16,7 @@ namespace CineBalmis.views.salas
     internal class SalasVM : ObservableObject
     {
         // Servicios
-        private DaoSalas dao;
+        private DAOSalas dao;
         private NavigationService navigationService;
 
         // Comandos - Click

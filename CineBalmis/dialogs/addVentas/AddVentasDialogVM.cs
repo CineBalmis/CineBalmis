@@ -15,31 +15,30 @@ namespace CineBalmis.dialogs.addVentas
     internal class AddVentasDialogVM: ObservableObject
     {
         // Servicios
-        private readonly DAOVentas daoVentas;
-        private readonly DAOSesiones daoSesiones;
-        private readonly DaoSalas daoSalas;
+        private DAOVentas daoVentas;
+        private DAOSesiones daoSesiones;
+        private DAOSalas daoSalas;
 
         // Comando - Click
         public RelayCommand GuardarVentaClick {get;}
 
         // Variables
-        private data.models.Ventas? venta;
-        private data.models.Sesiones? sesionSeleccionada;
-        private ObservableCollection<data.models.Sesiones>? sesiones;
-        private int? cantidad;
-        private string? metodo;
+        private Ventas venta;
+        private Sesiones? sesionSeleccionada;
+        private ObservableCollection<Sesiones> sesiones;
+        private int cantidad;
+        private string metodo;
 
-        public Ventas? Venta { get => venta; set => SetProperty(ref venta, value); }
-        public data.models.Sesiones? SesionSeleccionada { get => sesionSeleccionada; set => SetProperty(ref sesionSeleccionada, value); }
-        public ObservableCollection<Sesiones> Sesiones { get => sesiones ?? new(); set => SetProperty(ref sesiones, value); }
-        public int? Cantidad { get => cantidad; set => SetProperty(ref cantidad, value); }
-        public string? Metodo { get => metodo; set => SetProperty(ref metodo, value); }
+        public Ventas Venta { get => venta; set => SetProperty(ref venta, value); }
+        public Sesiones? SesionSeleccionada { get => sesionSeleccionada; set => SetProperty(ref sesionSeleccionada, value); }
+        public ObservableCollection<Sesiones> Sesiones { get => sesiones; set => SetProperty(ref sesiones, value); }
+        public int Cantidad { get => cantidad; set => SetProperty(ref cantidad, value); }
+        public string Metodo { get => metodo; set => SetProperty(ref metodo, value); }
 
         public AddVentasDialogVM()
         {
             daoVentas = new();
             daoSesiones = new();
-            daoSalas = new();
 
             GuardarVentaClick = new(GuardarVentaClicked);
 
@@ -57,7 +56,7 @@ namespace CineBalmis.dialogs.addVentas
                 }
                 else
                 {
-                    daoVentas.CrearVenta(SesionSeleccionada.IdSesion, Cantidad ?? 0, Metodo ?? "Tarjeta");
+                    daoVentas.CrearVenta(SesionSeleccionada.IdSesion, Cantidad, Metodo);
                     MessageBox.Show("Se ha guardado las nuevas ventas", "Registro Guardado", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }

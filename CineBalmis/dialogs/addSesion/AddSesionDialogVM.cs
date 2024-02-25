@@ -17,7 +17,7 @@ namespace CineBalmis.dialogs.addSesion
     {
         // Servicios
         private DAOSesiones daoSesiones;
-        private DaoSalas daoSalas;
+        private DAOSalas daoSalas;
         private DAOPeliculas daoPeliculas;
 
         // Comandos - Click

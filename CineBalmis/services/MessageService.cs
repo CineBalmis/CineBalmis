@@ -29,4 +29,8 @@ namespace CineBalmis.services
     {
         public EditSalaMessage(Salas edit) : base(edit) { }
     }
+    public class LogeadoTipoMessage: ValueChangedMessage<string>
+    {
+        public LogeadoTipoMessage(string tipo) : base(tipo) { }
+    }
 }

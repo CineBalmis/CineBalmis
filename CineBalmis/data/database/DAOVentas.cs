@@ -12,8 +12,9 @@ namespace CineBalmis.data.database
 {
     public class DAOVentas
     {
-        private  readonly SqliteConnection connection = Conexion.crearConexion();
-        public DAOVentas() { Conexion.cargarDatos(connection); }
+        private  readonly SqliteConnection connection = Conexion.CrearConexion();
+
+        public DAOVentas() { Conexion.CargarDatos(connection); }
         public ObservableCollection<Ventas> ObtenerVentas()
         {
             //Consulta de selección
@@ -41,7 +42,7 @@ namespace CineBalmis.data.database
             lector.Close();
 
             //Cerrar la conexión
-            Conexion.cerrarConexion(connection);
+            Conexion.CerrarConexion(connection);
 
             return ventas;
         }
@@ -75,7 +76,7 @@ namespace CineBalmis.data.database
                 lector.Close();
 
                 //Cerrar la conexión
-                Conexion.cerrarConexion(connection);
+                Conexion.CerrarConexion(connection);
             }
             return venta;
         }
